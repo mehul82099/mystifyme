@@ -54,11 +54,21 @@ pages.forEach(page => {
         outputStr = outputStr.replace(/href="\/mixins"/g, 'href="mixins.html"');
         outputStr = outputStr.replace(/href="\/order"/g, 'href="order.html"');
 
-        // Fix up assets for GitHub Pages root subpaths
+        // Fix up assets for GitHub Pages root subpaths (HTML attrs)
         outputStr = outputStr.replace(/href="\/css\//g, 'href="./css/');
         outputStr = outputStr.replace(/src="\/images\//g, 'src="./images/');
         outputStr = outputStr.replace(/src="\/js\//g, 'src="./js/');
         outputStr = outputStr.replace(/href="\/favicon.ico"/g, 'href="./favicon.ico"');
+
+        // Catch-all for JS string literal absolute paths
+        outputStr = outputStr.replace(/'\/images\//g, "'./images/");
+        outputStr = outputStr.replace(/'\/css\//g, "'./css/");
+        outputStr = outputStr.replace(/'\/js\//g, "'./js/");
+        outputStr = outputStr.replace(/'\/mixins'/g, "'mixins.html'");
+        outputStr = outputStr.replace(/'\/chocolates'/g, "'chocolates.html'");
+        outputStr = outputStr.replace(/'\/story'/g, "'story.html'");
+        outputStr = outputStr.replace(/'\/order'/g, "'order.html'");
+        outputStr = outputStr.replace(/"\/mixins"/g, '"mixins.html"');
 
         // Fix up JS redirects mapping
         outputStr = outputStr.replace("window.location.href = '/order'", "window.location.href = 'order.html'");

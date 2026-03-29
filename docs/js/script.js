@@ -238,7 +238,7 @@
       
       // Redirect to mixins after fill
       setTimeout(() => {
-        window.location.href = '/mixins';
+        window.location.href = 'mixins.html';
       }, 1300);
     });
   });

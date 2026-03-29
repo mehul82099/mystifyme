@@ -113,15 +113,15 @@
       const mixinChips = document.querySelectorAll('.mixin-chip');
       
       const nutImages = {
-        'Almonds': '/images/mixin-almonds.png',
-        'Cashews': '/images/mixin-cashew.png',
-        'Raisins': '/images/mixin-raisins.png'
+        'Almonds': './images/mixin-almonds.png',
+        'Cashews': './images/mixin-cashew.png',
+        'Raisins': './images/mixin-raisins.png'
       };
 
       mixinChips.forEach(chip => {
         chip.addEventListener('click', (e) => {
           const nutName = chip.textContent.trim();
-          const imgSrc = nutImages[nutName] || '/images/mystifyme-single-truffle.png'; // Fallback
+          const imgSrc = nutImages[nutName] || './images/mystifyme-single-truffle.png'; // Fallback
           
           if(!chip.classList.contains('selected')) return; // handled by global script.js
           
