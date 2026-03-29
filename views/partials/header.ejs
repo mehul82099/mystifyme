@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Mystify Me' %></title>
+  <meta name="description" content="Handcrafted artisan chocolates from Jaipur. Build your dream chocolate box.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- Grain overlay -->
+  <div class="grain-overlay"></div>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" id="nav-logo">Mystify<span>me</span></a>
+      <div class="nav-tagline">Handcrafted · Jaipur</div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/story">Our Story</a></li>
+        <li><a href="/chocolates">Chocolates</a></li>
+        <li><a href="/mixins">Mix-ins</a></li>
+        <li><a href="/order">Order Now</a></li>
+      </ul>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>

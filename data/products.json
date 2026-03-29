@@ -1,0 +1,39 @@
+{
+  "bases": [
+    {
+      "id": "white",
+      "name": "White",
+      "tag": "Base 01",
+      "description": "Creamy & smooth. A velvety canvas for your favourite mix-ins.",
+      "price": 150,
+      "unit": "70gm",
+      "image": "/images/white-chocolate.png"
+    },
+    {
+      "id": "milk",
+      "name": "Milk",
+      "tag": "Base 02",
+      "description": "The classic choice. Rich, familiar, and irresistibly comforting.",
+      "price": 150,
+      "unit": "70gm",
+      "image": "/images/milk-chocolate.png"
+    },
+    {
+      "id": "dark",
+      "name": "Dark",
+      "tag": "Base 03",
+      "description": "Intense & rich. For those who crave depth and bold cocoa character.",
+      "price": 150,
+      "unit": "70gm",
+      "image": "/images/dark-chocolate.png"
+    }
+  ],
+  "mixins": {
+    "nutsAndFruits": [
+      "Almond", "Cashew", "Raisin", "Pistachio", "Walnut", "Fig"
+    ],
+    "exoticAndSpices": [
+      "Rose", "Saffron", "Chilli", "Cardamom", "Coconut", "Honey"
+    ]
+  }
+}

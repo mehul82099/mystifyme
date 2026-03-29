@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+
+  <!-- ==================== MIX-INS ==================== -->
+  <section id="mixins" style="padding-top: 120px;">
+    <div class="mixins-container">
+      <div class="mixins-left">
+        <div class="mixins-image-wrapper">
+          <img src="/images/mixins.png" alt="Premium Mix-ins" class="mixins-img">
+          <div class="mixins-img-glow"></div>
+        </div>
+      </div>
+      <div class="mixins-right">
+        <span class="section-eyebrow">Customize</span>
+        <h2 class="section-heading">Add Your Mix-ins</h2>
+        <p class="section-desc">Elevate your chocolate with premium ingredients sourced from across India.</p>
+
+        <div class="mixins-category">
+          <h4>🌰 Nuts & Fruits</h4>
+          <div class="mixins-grid">
+            <% mixins.nutsAndFruits.forEach(item => { %>
+              <div class="mixin-chip"><%= item %></div>
+            <% }); %>
+          </div>
+        </div>
+
+        <div class="mixins-category">
+          <h4>✨ Exotic & Spices</h4>
+          <div class="mixins-grid">
+            <% mixins.exoticAndSpices.forEach(item => { %>
+              <div class="mixin-chip"><%= item %></div>
+            <% }); %>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <a href="chocolates.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem;">
+            <span>Choose Base</span>
+            <div class="cta-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+          <a href="order.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem; background: transparent; border: 1px solid var(--gold); color: var(--gold);">
+            <span style="color: var(--gold);">Go To Order</span>
+            <div class="cta-arrow" style="color: var(--gold);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%- include('partials/footer') %>

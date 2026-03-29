@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mystify Me - Mix-ins</title>
+  <meta name="description" content="Handcrafted artisan chocolates from Jaipur. Build your dream chocolate box.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- Grain overlay -->
+  <div class="grain-overlay"></div>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">Mystify<span>me</span></a>
+      <div class="nav-tagline">Handcrafted · Jaipur</div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="story.html">Our Story</a></li>
+        <li><a href="chocolates.html">Chocolates</a></li>
+        <li><a href="mixins.html">Mix-ins</a></li>
+        <li><a href="order.html">Order Now</a></li>
+      </ul>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- ==================== MIX-INS ==================== -->
+  <section id="mixins" style="padding-top: 120px;">
+    <div class="mixins-container">
+      <div class="mixins-left">
+        <div class="mixins-image-wrapper">
+          <img src="/images/mixins.png" alt="Premium Mix-ins" class="mixins-img">
+          <div class="mixins-img-glow"></div>
+        </div>
+      </div>
+      <div class="mixins-right">
+        <span class="section-eyebrow">Customize</span>
+        <h2 class="section-heading">Add Your Mix-ins</h2>
+        <p class="section-desc">Elevate your chocolate with premium ingredients sourced from across India.</p>
+
+        <div class="mixins-category">
+          <h4>🌰 Nuts & Fruits</h4>
+          <div class="mixins-grid">
+            
+              <div class="mixin-chip">Almond</div>
+            
+              <div class="mixin-chip">Cashew</div>
+            
+              <div class="mixin-chip">Raisin</div>
+            
+              <div class="mixin-chip">Pistachio</div>
+            
+              <div class="mixin-chip">Walnut</div>
+            
+              <div class="mixin-chip">Fig</div>
+            
+          </div>
+        </div>
+
+        <div class="mixins-category">
+          <h4>✨ Exotic & Spices</h4>
+          <div class="mixins-grid">
+            
+              <div class="mixin-chip">Rose</div>
+            
+              <div class="mixin-chip">Saffron</div>
+            
+              <div class="mixin-chip">Chilli</div>
+            
+              <div class="mixin-chip">Cardamom</div>
+            
+              <div class="mixin-chip">Coconut</div>
+            
+              <div class="mixin-chip">Honey</div>
+            
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <a href="chocolates.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem;">
+            <span>Choose Base</span>
+            <div class="cta-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+          <a href="order.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem; background: transparent; border: 1px solid var(--gold); color: var(--gold);">
+            <span style="color: var(--gold);">Go To Order</span>
+            <div class="cta-arrow" style="color: var(--gold);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3 class="footer-logo">Mystify<span>me</span></h3>
+        <p>Handcrafted artisan chocolates from Jaipur. Every truffle hand-poured with love, every box packed with intention.</p>
+        <p class="footer-location">📍 Jaipur, Rajasthan, India</p>
+      </div>
+      <div class="footer-links-col">
+        <h4>Quick Links</h4>
+        <a href="story.html">Our Story</a>
+        <a href="chocolates.html">Chocolates</a>
+        <a href="mixins.html">Mix-ins</a>
+        <a href="order.html">Order Now</a>
+      </div>
+      <div class="footer-links-col">
+        <h4>Connect</h4>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/mehul_1233/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/mehul.jhabak/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Mystify Me · Handcrafted with ♥ in Jaipur</p>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
+
