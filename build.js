@@ -54,6 +54,12 @@ pages.forEach(page => {
         outputStr = outputStr.replace(/href="\/mixins"/g, 'href="mixins.html"');
         outputStr = outputStr.replace(/href="\/order"/g, 'href="order.html"');
 
+        // Fix up assets for GitHub Pages root subpaths
+        outputStr = outputStr.replace(/href="\/css\//g, 'href="./css/');
+        outputStr = outputStr.replace(/src="\/images\//g, 'src="./images/');
+        outputStr = outputStr.replace(/src="\/js\//g, 'src="./js/');
+        outputStr = outputStr.replace(/href="\/favicon.ico"/g, 'href="./favicon.ico"');
+
         // Fix up JS redirects mapping
         outputStr = outputStr.replace("window.location.href = '/order'", "window.location.href = 'order.html'");
         
