@@ -10,11 +10,11 @@
 
     <div class="chocolate-showcase">
       <% bases.forEach(base => { %>
-      <div class="choco-card" id="choco-<%= base.id %>">
-        <div class="choco-card-glow"></div>
+      <div class="choco-card vibe-tilt" id="choco-<%= base.id %>" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+        <div class="choco-card-glow red-glow"></div>
         <div class="choco-card-inner">
           <div class="choco-card-img-wrap">
-            <img src="<%= base.image %>" alt="<%= base.name %> Chocolate" class="choco-card-img">
+            <img src="<%= base.image %>" alt="<%= base.name %> Chocolate" class="choco-card-img filter-<%= base.id %>">
           </div>
           <div class="choco-card-content">
             <span class="choco-tag"><%= base.tag %></span>
@@ -22,7 +22,7 @@
             <p class="choco-desc"><%= base.description %></p>
             <div class="choco-meta">
               <span class="choco-price">₹<%= base.price %> <small>/ <%= base.unit %></small></span>
-              <button class="choco-order-btn" data-product="<%= base.name %> Chocolate" data-price="<%= base.price %>">Order</button>
+              <button class="choco-order-btn" data-product="<%= base.name %> Chocolate" data-price="<%= base.price %>">Pour Base</button>
             </div>
           </div>
         </div>

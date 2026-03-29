@@ -1,42 +1,40 @@
 <%- include('partials/header') %>
 
   <!-- ==================== HERO ==================== -->
-  <section id="hero">
-    <div class="hero-bg-container">
-      <img src="/images/hero-bg.png" alt="Mystify Me Chocolates" class="hero-bg-img" id="hero-bg-img">
-      <div class="hero-gradient-overlay"></div>
-    </div>
-
-    <!-- Floating particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Animated gradient orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-    <div class="hero-content">
+  <section id="hero" style="display: flex; align-items: center; justify-content: space-between; overflow: hidden; padding-top: 80px;">
+    
+    <!-- Hero Text (Left) -->
+    <div class="hero-content" style="position: relative; z-index: 10; width: 50%; max-width: 600px; padding-left: 5%;">
       <div class="hero-badge">
         <span class="badge-dot"></span>
         <span>Handcrafted in Jaipur</span>
       </div>
-      <h1 class="hero-title" id="hero-title">
-        <span class="hero-line hero-line-1">Build your</span>
-        <span class="hero-line hero-line-2">dream</span>
-        <span class="hero-line hero-line-3">chocolate</span>
+      <h1 class="hero-title" id="hero-title" style="margin-left: 0; text-align: left;">
+        <span class="hero-line hero-line-1" style="display:block;">Build your</span>
+        <span class="hero-line hero-line-2" style="display:block;">dream</span>
+        <span class="hero-line hero-line-3" style="display:block;">chocolate</span>
       </h1>
-      <p class="hero-subtitle">Dil Se Bani Mithaas, Har Bite Mein Khushiyaan!</p>
-      <div class="hero-price-badge">
+      <p class="hero-subtitle" style="text-align: left;">Dil Se Bani Mithaas, Har Bite Mein Khushiyaan!</p>
+      <div class="hero-price-badge" style="justify-content: flex-start;">
         <span class="price-amount">₹150</span>
         <span class="price-unit">per 70gm pack</span>
       </div>
-      <a href="chocolates.html" class="hero-cta" id="hero-cta">
-        <span>Explore Collection</span>
+      <a href="/chocolates" class="hero-cta" id="hero-cta" style="margin: 2rem 0;">
+        <span>Craft Your Chocolate</span>
         <div class="cta-arrow">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </div>
       </a>
     </div>
+
+    <!-- Hero Image (Right) -->
+    <div class="hero-image-wrap" style="width: 50%; height: 100%; position: relative; z-index: 5; display: flex; align-items: center; justify-content: center;">
+      <div class="vibe-tilt" data-tilt data-tilt-max="4" data-tilt-speed="800" data-tilt-perspective="1000" style="position: relative; width: 100%; display: flex; justify-content: center;">
+        <div class="glow-effect" style="position: absolute; inset: -4rem; background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 65%); z-index: -1; border-radius: 50%; animation: pulse-glow 4s infinite alternate ease-in-out;"></div>
+        <img src="/images/hero-3d-tray.png?v=3" alt="Mystify Me Authentic 3D Tray" style="width: 100%; max-width: 600px; border-radius: 20px; object-fit: cover; -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 85%); mask-image: radial-gradient(circle at center, black 45%, transparent 85%); filter: brightness(1.1) contrast(1.05);">
+      </div>
+    </div>
+  <!-- Closing section is below -->
 
     <!-- Marquee ticker -->
     <div class="hero-ticker">

@@ -30,6 +30,34 @@
     </div>
   </footer>
 
+  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
+  <div id="vibe-coding-global-layer">
+    <!-- Floating chocolates -->
+    <div class="floating-choco-wrap">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
+    </div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <script>
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
+        max: 8,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+      });
+    }
+  </script>
   <script src="/js/script.js"></script>
 </body>
 </html>

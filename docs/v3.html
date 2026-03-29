@@ -3,15 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mystify Me</title>
+  <title>Mystify Me — Homepage</title>
   <meta name="description" content="Handcrafted artisan chocolates from Jaipur. Build your dream chocolate box.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/vibe-coding.css">
+
+<style>
+  #hero { transform-style: preserve-3d; perspective: 1200px; }
+  .hero-wrapper { transform-style: preserve-3d; transition: transform 0.1s; width:100%; height:100%; }
+  .hero-bg-container { transform: translateZ(50px) scale(1.1); filter: drop-shadow(0 40px 60px rgba(0,0,0,0.9)); z-index: 20; }
+  .hero-title { transform: translateZ(-50px); text-shadow: 0 20px 30px rgba(0,0,0,0.6); }
+  .hero-cta { transform: translateZ(100px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+  .floating-choco.c1 { transform: translateZ(150px); filter: drop-shadow(40px 40px 40px rgba(0,0,0,0.8)); }
+  .floating-choco.c2 { transform: translateZ(200px); filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8)); }
+</style>
 </head>
 <body>
+  <div style="position:fixed; top:20px; right:20px; z-index:9999; background:rgba(0,0,0,0.8); color:#f0d67b; font-size:24px; padding:10px 20px; border-radius:10px; border:1px solid #D4AF37; font-weight:bold; font-family:serif;">
+    V3: Cinematic Parallax
+  </div>
+  
   <!-- Cursor glow -->
   <div class="cursor-glow" id="cursor-glow"></div>
 
@@ -21,13 +35,13 @@
   <!-- ==================== NAVIGATION ==================== -->
   <nav id="navbar">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo" id="nav-logo">Mystify<span>me</span></a>
+      <a href="/" class="nav-logo" id="nav-logo">Mystify<span>me</span></a>
       <div class="nav-tagline">Handcrafted · Jaipur</div>
       <ul class="nav-links" id="nav-links">
-        <li><a href="story.html">Our Story</a></li>
-        <li><a href="chocolates.html">Chocolates</a></li>
-        <li><a href="mixins.html">Mix-ins</a></li>
-        <li><a href="order.html">Order Now</a></li>
+        <li><a href="/story">Our Story</a></li>
+        <li><a href="/chocolates">Chocolates</a></li>
+        <li><a href="/mixins">Mix-ins</a></li>
+        <li><a href="/order">Order Now</a></li>
       </ul>
       <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -37,40 +51,48 @@
 
 
   <!-- ==================== HERO ==================== -->
-  <section id="hero" style="display: flex; align-items: center; justify-content: space-between; overflow: hidden; padding-top: 80px;">
-    
-    <!-- Hero Text (Left) -->
-    <div class="hero-content" style="position: relative; z-index: 10; width: 50%; max-width: 600px; padding-left: 5%;">
+  <section id="hero">
+    <div class="hero-bg-container">
+      <img src="/images/mystifyme-authentic-tray.png" alt="Mystify Me Chocolates" class="hero-vibe-img" id="hero-bg-img" style="position: absolute; width: 100%; height: 100%; object-fit: contain; padding: 20px;">
+      <div class="hero-gradient-overlay red-glow"></div>
+    </div>
+
+    <!-- Floating chocolates -->
+    <div class="floating-choco-wrap">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
+    </div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span>
         <span>Handcrafted in Jaipur</span>
       </div>
-      <h1 class="hero-title" id="hero-title" style="margin-left: 0; text-align: left;">
-        <span class="hero-line hero-line-1" style="display:block;">Build your</span>
-        <span class="hero-line hero-line-2" style="display:block;">dream</span>
-        <span class="hero-line hero-line-3" style="display:block;">chocolate</span>
+      <h1 class="hero-title" id="hero-title">
+        <span class="hero-line hero-line-1">Build your</span>
+        <span class="hero-line hero-line-2">dream</span>
+        <span class="hero-line hero-line-3">chocolate</span>
       </h1>
-      <p class="hero-subtitle" style="text-align: left;">Dil Se Bani Mithaas, Har Bite Mein Khushiyaan!</p>
-      <div class="hero-price-badge" style="justify-content: flex-start;">
+      <p class="hero-subtitle">Dil Se Bani Mithaas, Har Bite Mein Khushiyaan!</p>
+      <div class="hero-price-badge">
         <span class="price-amount">₹150</span>
         <span class="price-unit">per 70gm pack</span>
       </div>
-      <a href="chocolates.html" class="hero-cta" id="hero-cta" style="margin: 2rem 0;">
-        <span>Craft Your Chocolate</span>
+      <a href="/chocolates" class="hero-cta" id="hero-cta">
+        <span>Explore Collection</span>
         <div class="cta-arrow">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </div>
       </a>
     </div>
-
-    <!-- Hero Image (Right) -->
-    <div class="hero-image-wrap" style="width: 50%; height: 100%; position: relative; z-index: 5; display: flex; align-items: center; justify-content: center;">
-      <div class="vibe-tilt" data-tilt data-tilt-max="4" data-tilt-speed="800" data-tilt-perspective="1000" style="position: relative; width: 100%; display: flex; justify-content: center;">
-        <div class="glow-effect" style="position: absolute; inset: -4rem; background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 65%); z-index: -1; border-radius: 50%; animation: pulse-glow 4s infinite alternate ease-in-out;"></div>
-        <img src="/images/hero-3d-tray.png?v=3" alt="Mystify Me Authentic 3D Tray" style="width: 100%; max-width: 600px; border-radius: 20px; object-fit: cover; -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 85%); mask-image: radial-gradient(circle at center, black 45%, transparent 85%); filter: brightness(1.1) contrast(1.05);">
-      </div>
-    </div>
-  <!-- Closing section is below -->
 
     <!-- Marquee ticker -->
     <div class="hero-ticker">
@@ -125,10 +147,10 @@
       </div>
       <div class="footer-links-col">
         <h4>Quick Links</h4>
-        <a href="story.html">Our Story</a>
-        <a href="chocolates.html">Chocolates</a>
-        <a href="mixins.html">Mix-ins</a>
-        <a href="order.html">Order Now</a>
+        <a href="/story">Our Story</a>
+        <a href="/chocolates">Chocolates</a>
+        <a href="/mixins">Mix-ins</a>
+        <a href="/order">Order Now</a>
       </div>
       <div class="footer-links-col">
         <h4>Connect</h4>
@@ -147,23 +169,6 @@
     </div>
   </footer>
 
-  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
-  <div id="vibe-coding-global-layer">
-    <!-- Floating chocolates -->
-    <div class="floating-choco-wrap">
-      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
-      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
-    </div>
-
-    <!-- Floating particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Animated gradient orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
   <script>
     if (typeof VanillaTilt !== 'undefined') {
@@ -176,6 +181,17 @@
     }
   </script>
   <script src="/js/script.js"></script>
+
+<script>
+  const hero3 = document.getElementById('hero');
+  hero3.innerHTML = '<div class="hero-wrapper">' + hero3.innerHTML + '</div>';
+  const wrapper3 = hero3.querySelector('.hero-wrapper');
+  window.addEventListener('mousemove', (e) => {
+    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+    wrapper3.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+  });
+</script>
 </body>
 </html>
 

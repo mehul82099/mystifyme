@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/vibe-coding.css">
 </head>
 <body>
   <!-- Cursor glow -->
@@ -45,9 +46,9 @@
         <p class="story-text">Pick your base, add mix-ins, and experience chocolate the way it was meant to be — personal, pure, and unforgettable.</p>
       </div>
       <div class="story-right">
-        <div class="story-image-wrapper">
-          <img src="/images/white-chocolate.png" alt="Mystify Me White Chocolate Box" class="story-img">
-          <div class="story-img-glow"></div>
+        <div class="story-image-wrapper vibe-tilt" data-tilt data-tilt-max="5" data-tilt-speed="400">
+          <img src="/images/mystifyme-authentic-tray.png" alt="Mystify Me Authentic Truffles" class="story-img">
+          <div class="story-img-glow red-glow"></div>
         </div>
       </div>
     </div>
@@ -85,6 +86,34 @@
     </div>
   </footer>
 
+  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
+  <div id="vibe-coding-global-layer">
+    <!-- Floating chocolates -->
+    <div class="floating-choco-wrap">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
+    </div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <script>
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
+        max: 8,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+      });
+    }
+  </script>
   <script src="/js/script.js"></script>
 </body>
 </html>

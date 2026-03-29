@@ -199,15 +199,47 @@
     });
   });
 
-  // ===== ORDER BUTTONS (WhatsApp / Redirect) =====
+  // ===== CHOCOLATE POURING SIMULATION (Base Selection) =====
   const orderButtons = document.querySelectorAll('.choco-order-btn');
   orderButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const product = btn.dataset.product;
       const price = btn.dataset.price;
       
       localStorage.setItem('mystifyBase', product);
-      window.location.href = '/order';
+      
+      // Determine Liquid Color
+      let liquidColor = '#3c1f11'; // Dark default
+      if (product.toLowerCase().includes('white')) liquidColor = '#f5e6d3';
+      else if (product.toLowerCase().includes('milk')) liquidColor = '#8b4a2b';
+      
+      // Create Liquid Overlay
+      const pourLayer = document.createElement('div');
+      pourLayer.style.position = 'fixed';
+      pourLayer.style.bottom = '0';
+      pourLayer.style.left = '0';
+      pourLayer.style.width = '100%';
+      pourLayer.style.height = '0%';
+      pourLayer.style.backgroundColor = liquidColor;
+      pourLayer.style.zIndex = '99999';
+      pourLayer.style.transition = 'all 1.2s cubic-bezier(0.4, 0.0, 0.2, 1)';
+      pourLayer.style.boxShadow = `0 -20px 40px ${liquidColor}`;
+      // Gooey slight wave effect trick via border radius
+      pourLayer.style.borderTopLeftRadius = '40% 20px';
+      pourLayer.style.borderTopRightRadius = '60% 30px';
+      
+      document.body.appendChild(pourLayer);
+      
+      // Trigger animation
+      setTimeout(() => {
+        pourLayer.style.height = '120%'; // Overshoot to fill screen
+      }, 50);
+      
+      // Redirect to mixins after fill
+      setTimeout(() => {
+        window.location.href = '/mixins';
+      }, 1300);
     });
   });
 
@@ -241,53 +273,14 @@
   if (whatsappBtn && formMessage) {
     function updateWhatsAppLink() {
       let msg = formMessage.value || 'Hi Mystify Me, I would like to order chocolates!';
-      whatsappBtn.href = `https://wa.me/919876543210?text=${encodeURIComponent(msg)}`;
+      whatsappBtn.href = `https://wa.me/918209951190?text=${encodeURIComponent(msg)}`;
     }
     updateWhatsAppLink();
     formMessage.addEventListener('input', updateWhatsAppLink);
   }
 
   // ===== CONTACT FORM =====
-  const contactForm = document.getElementById('contact-form');
-  const formSubmitBtn = document.getElementById('form-submit');
-
-  if (contactForm && formSubmitBtn) {
-    contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const originalHTML = formSubmitBtn.innerHTML;
-    formSubmitBtn.innerHTML = '<span>Sending...</span>';
-    formSubmitBtn.disabled = true;
-
-    try {
-      const formData = new FormData(contactForm);
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        formSubmitBtn.innerHTML = '<span>✓ Order Sent!</span>';
-        formSubmitBtn.style.background = 'linear-gradient(135deg, #25D366, #1ebe57)';
-        contactForm.reset();
-        setTimeout(() => {
-          formSubmitBtn.innerHTML = originalHTML;
-          formSubmitBtn.style.background = '';
-          formSubmitBtn.disabled = false;
-        }, 3000);
-      } else {
-        throw new Error('Failed');
-      }
-    } catch (error) {
-      formSubmitBtn.innerHTML = '<span>Failed — Try Again</span>';
-      formSubmitBtn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
-      setTimeout(() => {
-        formSubmitBtn.innerHTML = originalHTML;
-        formSubmitBtn.style.background = '';
-        formSubmitBtn.disabled = false;
-      }, 3000);
-    }
-  });
-  }
+  // Handled inline via sendToWhatsApp in order.ejs
 
   // ===== SMOOTH ANCHOR =====
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -314,5 +307,36 @@
   // ===== CONSOLE BRANDING =====
   console.log('%c✨ Mystify Me', 'font-size: 24px; font-weight: bold; color: #D4AF37; font-family: serif;');
   console.log('%cHandcrafted Artisan Chocolates · Jaipur', 'font-size: 11px; color: #9a8e7e;');
+
+  // ===== UNIVERSAL VIBE CODING INTERACTIONS =====
+  let lastX = 0, lastY = 0;
+  window.addEventListener('mousemove', (e) => {
+    const dist = Math.sqrt(Math.pow(e.clientX - lastX, 2) + Math.pow(e.clientY - lastY, 2));
+    if (dist > 75) {
+      lastX = e.clientX; 
+      lastY = e.clientY;
+      
+      // Spawn Ripple
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = e.clientX + 'px';
+      ripple.style.top = (e.clientY + window.scrollY) + 'px';
+      ripple.style.width = '80px'; 
+      ripple.style.height = '80px';
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 1500);
+      
+      // Wobble floating chocolates globally
+      document.querySelectorAll('.floating-choco').forEach(choco => {
+        const cRect = choco.getBoundingClientRect();
+        const cDist = Math.sqrt(Math.pow(e.clientX - (cRect.left+cRect.width/2), 2) + Math.pow(e.clientY - (cRect.top+cRect.height/2), 2));
+        if (cDist < 250) {
+          choco.style.transform = `scale(1.15) rotate(${(Math.random()*20 - 10)}deg) translate(${(Math.random()*10 - 5)}px, ${(Math.random()*10 - 5)}px)`;
+          choco.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          setTimeout(() => choco.style.transform = '', 400);
+        }
+      });
+    }
+  }, { passive: true });
 
 })();

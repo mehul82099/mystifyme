@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/vibe-coding.css">
 </head>
 <body>
   <!-- Cursor glow -->
@@ -45,11 +46,11 @@
 
     <div class="chocolate-showcase">
       
-      <div class="choco-card" id="choco-white">
-        <div class="choco-card-glow"></div>
+      <div class="choco-card vibe-tilt" id="choco-white" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+        <div class="choco-card-glow red-glow"></div>
         <div class="choco-card-inner">
           <div class="choco-card-img-wrap">
-            <img src="/images/white-chocolate.png" alt="White Chocolate" class="choco-card-img">
+            <img src="/images/mystifyme-authentic-tray.png" alt="White Chocolate" class="choco-card-img filter-white">
           </div>
           <div class="choco-card-content">
             <span class="choco-tag">Base 01</span>
@@ -57,17 +58,17 @@
             <p class="choco-desc">Creamy &amp; smooth. A velvety canvas for your favourite mix-ins.</p>
             <div class="choco-meta">
               <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="White Chocolate" data-price="150">Order</button>
+              <button class="choco-order-btn" data-product="White Chocolate" data-price="150">Pour Base</button>
             </div>
           </div>
         </div>
       </div>
       
-      <div class="choco-card" id="choco-milk">
-        <div class="choco-card-glow"></div>
+      <div class="choco-card vibe-tilt" id="choco-milk" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+        <div class="choco-card-glow red-glow"></div>
         <div class="choco-card-inner">
           <div class="choco-card-img-wrap">
-            <img src="/images/milk-chocolate.png" alt="Milk Chocolate" class="choco-card-img">
+            <img src="/images/mystifyme-authentic-tray.png" alt="Milk Chocolate" class="choco-card-img filter-milk">
           </div>
           <div class="choco-card-content">
             <span class="choco-tag">Base 02</span>
@@ -75,17 +76,17 @@
             <p class="choco-desc">The classic choice. Rich, familiar, and irresistibly comforting.</p>
             <div class="choco-meta">
               <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="Milk Chocolate" data-price="150">Order</button>
+              <button class="choco-order-btn" data-product="Milk Chocolate" data-price="150">Pour Base</button>
             </div>
           </div>
         </div>
       </div>
       
-      <div class="choco-card" id="choco-dark">
-        <div class="choco-card-glow"></div>
+      <div class="choco-card vibe-tilt" id="choco-dark" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+        <div class="choco-card-glow red-glow"></div>
         <div class="choco-card-inner">
           <div class="choco-card-img-wrap">
-            <img src="/images/dark-chocolate.png" alt="Dark Chocolate" class="choco-card-img">
+            <img src="/images/mystifyme-authentic-tray.png" alt="Dark Chocolate" class="choco-card-img filter-dark">
           </div>
           <div class="choco-card-content">
             <span class="choco-tag">Base 03</span>
@@ -93,7 +94,7 @@
             <p class="choco-desc">Intense &amp; rich. For those who crave depth and bold cocoa character.</p>
             <div class="choco-meta">
               <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="Dark Chocolate" data-price="150">Order</button>
+              <button class="choco-order-btn" data-product="Dark Chocolate" data-price="150">Pour Base</button>
             </div>
           </div>
         </div>
@@ -134,6 +135,34 @@
     </div>
   </footer>
 
+  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
+  <div id="vibe-coding-global-layer">
+    <!-- Floating chocolates -->
+    <div class="floating-choco-wrap">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
+    </div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <script>
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
+        max: 8,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+      });
+    }
+  </script>
   <script src="/js/script.js"></script>
 </body>
 </html>

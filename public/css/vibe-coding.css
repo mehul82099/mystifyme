@@ -1,0 +1,127 @@
+/* ===== VIBE CODING STYLES ===== */
+body {
+  background: transparent !important;
+}
+/* Red Breathing Glow */
+.red-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(220, 20, 40, 0.25), transparent 70%);
+  animation: breatheGlow 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes breatheGlow {
+  0% { opacity: 0.6; transform: scale(0.95); }
+  100% { opacity: 1.2; transform: scale(1.05); }
+}
+
+/* Global Background Vibe Layer */
+#vibe-coding-global-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(15,10,5,1), rgba(0,0,0,1));
+}
+
+#vibe-coding-global-layer .particles, 
+#vibe-coding-global-layer .orb {
+  z-index: -5;
+}
+
+/* Global Liquid Mouse Ripples */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleAnim 1.5s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+  pointer-events: none;
+  z-index: 200;
+  box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+@keyframes rippleAnim {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; border-width: 4px; }
+  100% { transform: translate(-50%, -50%) scale(4); opacity: 0; border-width: 0; }
+}
+
+/* Floating Chocolates */
+.floating-choco-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: -2; /* Above bg, below content */
+  pointer-events: none;
+}
+
+.floating-choco {
+  position: absolute;
+  opacity: 0.85;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
+}
+
+.floating-choco.c1 {
+  width: 250px;
+  top: 15%;
+  left: 10%;
+  animation: floatChoco1 8s ease-in-out infinite alternate;
+}
+
+.floating-choco.c2 {
+  width: 300px;
+  bottom: 20%;
+  right: 5%;
+  animation: floatChoco2 12s ease-in-out infinite alternate;
+  transform: rotate(25deg);
+}
+
+@keyframes floatChoco1 {
+  0% { transform: translateY(0) rotate(-10deg); }
+  100% { transform: translateY(-40px) rotate(5deg); }
+}
+
+@keyframes floatChoco2 {
+  0% { transform: translateY(0) rotate(25deg); }
+  100% { transform: translateY(-50px) rotate(10deg); }
+}
+
+
+
+/* Enhancing chocolate cards for 3D glow */
+.choco-card-glow.red-glow {
+  inset: -20px;
+  filter: blur(25px);
+  z-index: -1;
+}
+
+/* Fix Card Aspect Ratio for Authentic Flat Trays */
+.choco-card-img-wrap {
+  aspect-ratio: 4/3 !important;
+  padding: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choco-card-img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  transform: scale(1.05); /* Centered naturally without shifting down */
+}
+
+.vibe-tilt:hover .choco-card-glow.red-glow {
+  opacity: 1;
+}
+
+/* Authentic Chocolates Filters */
+
+
+.filter-milk {
+  /* Warm light brown */
+  filter: sepia(0.8) hue-rotate(-20deg) brightness(0.65) contrast(1.1) saturate(1.4);
+}
+
+.filter-dark {
+  /* Rich deep dark brown */
+  filter: sepia(0.9) hue-rotate(-15deg) brightness(0.35) contrast(1.25) saturate(1.8);
+}

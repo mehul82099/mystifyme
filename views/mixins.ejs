@@ -3,10 +3,10 @@
   <!-- ==================== MIX-INS ==================== -->
   <section id="mixins" style="padding-top: 120px;">
     <div class="mixins-container">
-      <div class="mixins-left">
-        <div class="mixins-image-wrapper">
-          <img src="/images/mixins.png" alt="Premium Mix-ins" class="mixins-img">
-          <div class="mixins-img-glow"></div>
+      <div class="mixins-left" style="position: relative;">
+        <div class="mixins-image-wrapper vibe-tilt" data-tilt data-tilt-max="5" data-tilt-speed="400" style="filter: hue-rotate(-10deg) brightness(0.9);">
+          <img src="/images/mystifyme-authentic-tray.png" alt="Mystify Me Mix-ins" class="mixins-img" id="mixins-drop-zone">
+          <div class="mixins-img-glow red-glow"></div>
         </div>
       </div>
       <div class="mixins-right">
@@ -33,13 +33,13 @@
         </div>
 
         <div style="margin-top: 3rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-          <a href="chocolates.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem;">
+          <a href="/chocolates" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem;">
             <span>Choose Base</span>
             <div class="cta-arrow">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </a>
-          <a href="order.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem; background: transparent; border: 1px solid var(--gold); color: var(--gold);">
+          <a href="/order" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem; background: transparent; border: 1px solid var(--gold); color: var(--gold);">
             <span style="color: var(--gold);">Go To Order</span>
             <div class="cta-arrow" style="color: var(--gold);">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -49,5 +49,67 @@
       </div>
     </div>
   </section>
+
+  <!-- JS For Mixin Drops Simulator -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropZone = document.getElementById('mixins-drop-zone');
+      const mixinChips = document.querySelectorAll('.mixin-chip');
+      
+      const nutImages = {
+        'Almonds': '/images/mixin-almonds.png',
+        'Cashews': '/images/mixin-cashew.png',
+        'Raisins': '/images/mixin-raisins.png'
+      };
+
+      mixinChips.forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          const nutName = chip.textContent.trim();
+          const imgSrc = nutImages[nutName] || '/images/mystifyme-single-truffle.png'; // Fallback
+          
+          if(!chip.classList.contains('selected')) return; // handled by global script.js
+          
+          // Create falling element
+          const fallingNut = document.createElement('img');
+          fallingNut.src = imgSrc;
+          fallingNut.style.position = 'fixed';
+          fallingNut.style.width = '60px'; // size of nut
+          fallingNut.style.height = '60px';
+          fallingNut.style.objectFit = 'contain';
+          fallingNut.style.zIndex = '9999';
+          fallingNut.style.pointerEvents = 'none';
+          
+          // Initial position (where clicked)
+          fallingNut.style.left = e.clientX - 30 + 'px';
+          fallingNut.style.top = e.clientY - 30 + 'px';
+          
+          document.body.appendChild(fallingNut);
+          
+          // Get Drop Zone physical coordinates
+          const targetRect = dropZone.getBoundingClientRect();
+          // Pick a random spot inside the tray
+          const targetX = targetRect.left + 50 + Math.random() * (targetRect.width - 100);
+          const targetY = targetRect.top + targetRect.height/2 + Math.random() * 50;
+          
+          // Setup animation transition
+          fallingNut.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          
+          // Force layout reflow
+          void fallingNut.offsetWidth;
+          
+          // Trigger drop
+          fallingNut.style.left = targetX + 'px';
+          fallingNut.style.top = targetY + 'px';
+          fallingNut.style.transform = `rotate(${Math.random() * 360}deg) scale(0.6)`;
+          fallingNut.style.opacity = '0.8';
+          
+          // Remove after drop
+          setTimeout(() => {
+            fallingNut.remove();
+          }, 800);
+        });
+      });
+    });
+  </script>
 
 <%- include('partials/footer') %>

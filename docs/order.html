@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/vibe-coding.css">
 </head>
 <body>
   <!-- Cursor glow -->
@@ -42,52 +43,102 @@
         <span class="section-eyebrow">Place Your Order</span>
         <h2 class="section-heading">Ready to<br><em>Mystify?</em></h2>
         <p class="order-desc">Order via WhatsApp for a personalized experience. Tell us your base, mix-ins, and we'll craft your dream box.</p>
-        <a href="https://wa.me/919876543210?text=Hi%20Mystify%20Me%2C%20I%20would%20like%20to%20order%20chocolates!" class="whatsapp-btn" id="whatsapp-btn" target="_blank" rel="noopener">
+        <a href="https://wa.me/918209951190?text=Hi%20Mystify%20Me%2C%20I%20would%20like%20to%20order%20chocolates!" class="whatsapp-btn" id="whatsapp-btn" target="_blank" rel="noopener">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span>Order on WhatsApp</span>
         </a>
-        <div class="order-stats">
-          <div class="stat">
-            <span class="stat-number">500+</span>
-            <span class="stat-label">Happy Customers</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">30 min</span>
-            <span class="stat-label">Reply Time</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">Mon–Sat</span>
-            <span class="stat-label">10AM–8PM IST</span>
-          </div>
-        </div>
       </div>
-      <div class="order-right">
-        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-          <input type="hidden" name="subject" value="New Order — Mystify Me">
-          <div class="form-group">
-            <input type="text" name="name" id="form-name" placeholder=" " required>
-            <label for="form-name">Your Name</label>
-            <div class="form-line"></div>
-          </div>
-          <div class="form-group">
-            <input type="tel" name="phone" id="form-phone" placeholder=" " required>
-            <label for="form-phone">WhatsApp Number</label>
-            <div class="form-line"></div>
-          </div>
-          <div class="form-group">
-            <textarea name="message" id="form-message" rows="3" placeholder=" " required></textarea>
-            <label for="form-message">Your Order (Base + Mix-ins)</label>
-            <div class="form-line"></div>
-          </div>
-          <button type="submit" class="form-submit" id="form-submit">
-            <span>Send Order</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          </button>
-        </form>
+      <div class="order-right" style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
+        <!-- Initial Checkout Button -->
+        <button id="initiate-checkout-btn" class="choco-order-btn" style="padding: 24px 48px; font-size: 1.5rem; letter-spacing: 2px;">
+          Finalize Box
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- Checkout Overlay Portal -->
+  <div id="checkout-portal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(20px);">
+    
+    <!-- Stage 1: Fake Error / Processing Simulator -->
+    <div id="checkout-stage-error" style="text-align: center; color: var(--gold);">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="spin" style="animation: spin 3s linear infinite;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="30" stroke-linecap="round"/></svg>
+      <h2 style="font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 4px; margin-top: 1rem;" class="glitch-text">Processing Fluid Mix...</h2>
+      <p style="font-family: var(--font-mono); font-size: 0.8rem; opacity: 0.6;">Injecting Base • Sealing Ingredients • Tempering</p>
+    </div>
+
+    <!-- Stage 2: Form Details -->
+    <div id="checkout-stage-form" style="display: none; width: 100%; max-width: 500px; padding: 2rem;">
+      <h2 style="color: white; margin-bottom: 2rem; text-align: center;">Who is this masterpiece for?</h2>
+      <form id="contact-form" onsubmit="sendOrderSequence(event)">
+        <div class="form-group">
+          <input type="text" name="name" id="form-name" placeholder=" " required style="color: white; border-bottom: 1px solid var(--gold);">
+          <label for="form-name" style="color: var(--gold);">Your Name</label>
+        </div>
+        <div class="form-group">
+          <input type="tel" name="phone" id="form-phone" placeholder=" " required style="color: white; border-bottom: 1px solid var(--gold);">
+          <label for="form-phone" style="color: var(--gold);">WhatsApp Number</label>
+        </div>
+        <div class="form-group">
+          <textarea name="message" id="form-message" rows="3" placeholder=" " required style="color: white; border-bottom: 1px solid var(--gold);"></textarea>
+          <label for="form-message" style="color: var(--gold);">Your Creation</label>
+        </div>
+        <button type="submit" class="hero-cta" style="width: 100%; justify-content: center; border: none; font-size: 1.1rem; padding: 1.2rem;">
+          <span>Send Order</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Stage 3: Ready -->
+    <div id="checkout-stage-ready" style="display: none; text-align: center; color: #4CAF50;">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      <h2 style="font-family: var(--font-display); font-size: 3rem; margin-top: 1rem; color: white;">Your Chocolates Are Ready! ✨</h2>
+      <p style="color: var(--gold); letter-spacing: 1px;">Redirecting you to our kitchen...</p>
+    </div>
+
+  </div>
+
+  <style>
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .glitch-text { text-shadow: 2px 0 5px rgba(212,175,55,0.8), -2px 0 5px rgba(220,20,40,0.8); }
+  </style>
+
+  <script>
+    document.getElementById('initiate-checkout-btn').addEventListener('click', () => {
+      const portal = document.getElementById('checkout-portal');
+      const stageError = document.getElementById('checkout-stage-error');
+      const stageForm = document.getElementById('checkout-stage-form');
+      
+      portal.style.display = 'flex';
+      
+      // Stage 1 -> Stage 2 logic
+      setTimeout(() => {
+        stageError.style.display = 'none';
+        stageForm.style.display = 'block';
+      }, 3000); // 3 seconds of "Fake Processing Error/Simulation"
+    });
+
+    function sendOrderSequence(event) {
+      event.preventDefault();
+      
+      const stageForm = document.getElementById('checkout-stage-form');
+      const stageReady = document.getElementById('checkout-stage-ready');
+      const name = document.getElementById('form-name').value;
+      const phone = document.getElementById('form-phone').value;
+      const message = document.getElementById('form-message').value;
+
+      // Show Stage 3
+      stageForm.style.display = 'none';
+      stageReady.style.display = 'block';
+
+      // Stage 3 -> WhatsApp
+      setTimeout(() => {
+        const text = `Hi Mystify Me!\nMy name is ${name}.\nWhatsApp Number: ${phone}\n\nI just built my dream order:\n${message}`;
+        const whatsappUrl = `https://wa.me/918209951190?text=${encodeURIComponent(text)}`;
+        window.location.href = whatsappUrl;
+      }, 2500); // Wait 2.5s showing "ready"
+    }
+  </script>
 
   <!-- ==================== FOOTER ==================== -->
   <footer id="footer">
@@ -121,6 +172,34 @@
     </div>
   </footer>
 
+  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
+  <div id="vibe-coding-global-layer">
+    <!-- Floating chocolates -->
+    <div class="floating-choco-wrap">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
+    </div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <script>
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
+        max: 8,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+      });
+    }
+  </script>
   <script src="/js/script.js"></script>
 </body>
 </html>

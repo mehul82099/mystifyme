@@ -7,7 +7,7 @@
       "description": "Creamy & smooth. A velvety canvas for your favourite mix-ins.",
       "price": 150,
       "unit": "70gm",
-      "image": "/images/white-chocolate.png"
+      "image": "/images/mystifyme-authentic-tray.png"
     },
     {
       "id": "milk",
@@ -16,7 +16,7 @@
       "description": "The classic choice. Rich, familiar, and irresistibly comforting.",
       "price": 150,
       "unit": "70gm",
-      "image": "/images/milk-chocolate.png"
+      "image": "/images/mystifyme-authentic-tray.png"
     },
     {
       "id": "dark",
@@ -25,7 +25,7 @@
       "description": "Intense & rich. For those who crave depth and bold cocoa character.",
       "price": 150,
       "unit": "70gm",
-      "image": "/images/dark-chocolate.png"
+      "image": "/images/mystifyme-authentic-tray.png"
     }
   ],
   "mixins": {

@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/vibe-coding.css">
 </head>
 <body>
   <!-- Cursor glow -->
@@ -38,10 +39,10 @@
   <!-- ==================== MIX-INS ==================== -->
   <section id="mixins" style="padding-top: 120px;">
     <div class="mixins-container">
-      <div class="mixins-left">
-        <div class="mixins-image-wrapper">
-          <img src="/images/mixins.png" alt="Premium Mix-ins" class="mixins-img">
-          <div class="mixins-img-glow"></div>
+      <div class="mixins-left" style="position: relative;">
+        <div class="mixins-image-wrapper vibe-tilt" data-tilt data-tilt-max="5" data-tilt-speed="400" style="filter: hue-rotate(-10deg) brightness(0.9);">
+          <img src="/images/mystifyme-authentic-tray.png" alt="Mystify Me Mix-ins" class="mixins-img" id="mixins-drop-zone">
+          <div class="mixins-img-glow red-glow"></div>
         </div>
       </div>
       <div class="mixins-right">
@@ -105,6 +106,68 @@
     </div>
   </section>
 
+  <!-- JS For Mixin Drops Simulator -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropZone = document.getElementById('mixins-drop-zone');
+      const mixinChips = document.querySelectorAll('.mixin-chip');
+      
+      const nutImages = {
+        'Almonds': '/images/mixin-almonds.png',
+        'Cashews': '/images/mixin-cashew.png',
+        'Raisins': '/images/mixin-raisins.png'
+      };
+
+      mixinChips.forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          const nutName = chip.textContent.trim();
+          const imgSrc = nutImages[nutName] || '/images/mystifyme-single-truffle.png'; // Fallback
+          
+          if(!chip.classList.contains('selected')) return; // handled by global script.js
+          
+          // Create falling element
+          const fallingNut = document.createElement('img');
+          fallingNut.src = imgSrc;
+          fallingNut.style.position = 'fixed';
+          fallingNut.style.width = '60px'; // size of nut
+          fallingNut.style.height = '60px';
+          fallingNut.style.objectFit = 'contain';
+          fallingNut.style.zIndex = '9999';
+          fallingNut.style.pointerEvents = 'none';
+          
+          // Initial position (where clicked)
+          fallingNut.style.left = e.clientX - 30 + 'px';
+          fallingNut.style.top = e.clientY - 30 + 'px';
+          
+          document.body.appendChild(fallingNut);
+          
+          // Get Drop Zone physical coordinates
+          const targetRect = dropZone.getBoundingClientRect();
+          // Pick a random spot inside the tray
+          const targetX = targetRect.left + 50 + Math.random() * (targetRect.width - 100);
+          const targetY = targetRect.top + targetRect.height/2 + Math.random() * 50;
+          
+          // Setup animation transition
+          fallingNut.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          
+          // Force layout reflow
+          void fallingNut.offsetWidth;
+          
+          // Trigger drop
+          fallingNut.style.left = targetX + 'px';
+          fallingNut.style.top = targetY + 'px';
+          fallingNut.style.transform = `rotate(${Math.random() * 360}deg) scale(0.6)`;
+          fallingNut.style.opacity = '0.8';
+          
+          // Remove after drop
+          setTimeout(() => {
+            fallingNut.remove();
+          }, 800);
+        });
+      });
+    });
+  </script>
+
   <!-- ==================== FOOTER ==================== -->
   <footer id="footer">
     <div class="footer-container">
@@ -137,6 +200,34 @@
     </div>
   </footer>
 
+  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
+  <div id="vibe-coding-global-layer">
+    <!-- Floating chocolates -->
+    <div class="floating-choco-wrap">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
+      <img src="/images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
+    </div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Animated gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <script>
+    if (typeof VanillaTilt !== 'undefined') {
+      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
+        max: 8,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+      });
+    }
+  </script>
   <script src="/js/script.js"></script>
 </body>
 </html>
