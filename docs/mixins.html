@@ -3,13 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mystify Me - Mix-ins</title>
+  <title>Mystify Me - Add Mix-ins</title>
   <meta name="description" content="Handcrafted artisan chocolates from Jaipur. Build your dream chocolate box.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/vibe-coding.css">
+  <style>
+    /* Step Indicator */
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 0;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .step-item.active { color: var(--gold); }
+    .step-item.done { color: rgba(212,175,55,0.5); }
+    .step-circle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .step-item.active .step-circle {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+    }
+    .step-item.done .step-circle {
+      background: rgba(212,175,55,0.2);
+    }
+    .step-line {
+      width: 60px; height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 0 0.75rem;
+    }
+
+    /* Base banner */
+    .base-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 12px;
+      padding: 0.9rem 2rem;
+      margin: 1.5rem auto 2.5rem;
+      max-width: 500px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      color: var(--gold);
+    }
+    .base-banner span.base-name {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .base-banner a {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-decoration: underline;
+      margin-left: 0.5rem;
+    }
+
+    /* Mixin chip selected state */
+    .mixin-chip {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .mixin-chip.selected {
+      background: var(--gold) !important;
+      color: #000 !important;
+      border-color: var(--gold) !important;
+      font-weight: 600;
+    }
+    .mixin-chip.selected::after {
+      content: ' ✓';
+    }
+
+    /* Selected summary bar */
+    .selected-summary {
+      position: sticky;
+      bottom: 1.5rem;
+      left: 0; right: 0;
+      margin: 2rem auto 0;
+      max-width: 500px;
+      background: rgba(15,10,5,0.92);
+      border: 1px solid var(--gold);
+      border-radius: 14px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      backdrop-filter: blur(16px);
+      z-index: 100;
+    }
+    .selected-summary-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      letter-spacing: 0.5px;
+      flex: 1;
+    }
+    .selected-summary-text strong {
+      color: var(--gold);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .proceed-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .proceed-btn:hover { transform: scale(1.04); }
+    .proceed-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+  </style>
 </head>
 <body>
   <!-- Cursor glow -->
@@ -37,7 +176,7 @@
 
 
   <!-- ==================== MIX-INS ==================== -->
-  <section id="mixins" style="padding-top: 120px;">
+  <section id="mixins" style="padding-top: 120px; padding-bottom: 100px;">
     <div class="mixins-container">
       <div class="mixins-left" style="position: relative;">
         <div class="mixins-image-wrapper vibe-tilt" data-tilt data-tilt-max="5" data-tilt-speed="400" style="filter: hue-rotate(-10deg) brightness(0.9);">
@@ -46,126 +185,150 @@
         </div>
       </div>
       <div class="mixins-right">
+        <!-- Step indicator -->
+        <div class="step-indicator" style="justify-content: flex-start; margin-bottom: 1.5rem;">
+          <div class="step-item done">
+            <div class="step-circle">✓</div>
+            <span>Base</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-item active">
+            <div class="step-circle">2</div>
+            <span>Mix-ins</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-item">
+            <div class="step-circle">3</div>
+            <span>Order</span>
+          </div>
+        </div>
+
         <span class="section-eyebrow">Customize</span>
-        <h2 class="section-heading">Add Your Mix-ins</h2>
-        <p class="section-desc">Elevate your chocolate with premium ingredients sourced from across India.</p>
+        <h2 class="section-heading">Step 2: Add Mix-ins</h2>
+
+        <!-- Base Banner -->
+        <div class="base-banner" id="base-banner">
+          <span>🍫 Your base:</span>
+          <span class="base-name" id="banner-base-name">White Chocolate</span>
+          <a href="chocolates.html">Change</a>
+        </div>
+
+        <p class="section-desc" style="margin-top: 0;">Elevate your chocolate with premium ingredients sourced from across India.</p>
 
         <div class="mixins-category">
-          <h4>🌰 Nuts & Fruits</h4>
+          <h4>🌰 Nuts &amp; Fruits</h4>
           <div class="mixins-grid">
-            
-              <div class="mixin-chip">Almond</div>
-            
-              <div class="mixin-chip">Cashew</div>
-            
-              <div class="mixin-chip">Raisin</div>
-            
-              <div class="mixin-chip">Pistachio</div>
-            
-              <div class="mixin-chip">Walnut</div>
-            
-              <div class="mixin-chip">Fig</div>
-            
+            <div class="mixin-chip" onclick="toggleMixin(this)">Almond</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Cashew</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Raisin</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Pistachio</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Walnut</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Fig</div>
           </div>
         </div>
 
         <div class="mixins-category">
-          <h4>✨ Exotic & Spices</h4>
+          <h4>✨ Exotic &amp; Spices</h4>
           <div class="mixins-grid">
-            
-              <div class="mixin-chip">Rose</div>
-            
-              <div class="mixin-chip">Saffron</div>
-            
-              <div class="mixin-chip">Chilli</div>
-            
-              <div class="mixin-chip">Cardamom</div>
-            
-              <div class="mixin-chip">Coconut</div>
-            
-              <div class="mixin-chip">Honey</div>
-            
+            <div class="mixin-chip" onclick="toggleMixin(this)">Rose</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Saffron</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Chilli</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Cardamom</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Coconut</div>
+            <div class="mixin-chip" onclick="toggleMixin(this)">Honey</div>
           </div>
         </div>
 
-        <div style="margin-top: 3rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-          <a href="chocolates.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem;">
-            <span>Choose Base</span>
-            <div class="cta-arrow">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
-          </a>
-          <a href="order.html" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.75rem; background: transparent; border: 1px solid var(--gold); color: var(--gold);">
-            <span style="color: var(--gold);">Go To Order</span>
-            <div class="cta-arrow" style="color: var(--gold);">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
-          </a>
+        <!-- Sticky summary + proceed -->
+        <div class="selected-summary">
+          <div class="selected-summary-text">
+            <strong id="summary-base">Base: —</strong>
+            <span id="summary-mixins">No mix-ins selected yet</span>
+          </div>
+          <button class="proceed-btn" id="proceed-btn" onclick="proceedToOrder()">
+            Go to Order →
+          </button>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- JS For Mixin Drops Simulator -->
+  <!-- JS -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Load saved base
+      const savedBase = localStorage.getItem('mm_base') || 'White Chocolate';
+      document.getElementById('banner-base-name').textContent = savedBase;
+      document.getElementById('summary-base').textContent = 'Base: ' + savedBase;
+
+      // Load previously selected mixins if any
+      const savedMixins = JSON.parse(localStorage.getItem('mm_mixins') || '[]');
+      if (savedMixins.length > 0) {
+        document.querySelectorAll('.mixin-chip').forEach(chip => {
+          if (savedMixins.includes(chip.textContent.replace(' ✓', '').trim())) {
+            chip.classList.add('selected');
+          }
+        });
+        updateSummary();
+      }
+
+      // Drop zone visual (original feature)
       const dropZone = document.getElementById('mixins-drop-zone');
-      const mixinChips = document.querySelectorAll('.mixin-chip');
-      
       const nutImages = {
         'Almonds': './images/mixin-almonds.png',
         'Cashews': './images/mixin-cashew.png',
         'Raisins': './images/mixin-raisins.png'
       };
 
-      mixinChips.forEach(chip => {
+      document.querySelectorAll('.mixin-chip').forEach(chip => {
         chip.addEventListener('click', (e) => {
-          const nutName = chip.textContent.trim();
-          const imgSrc = nutImages[nutName] || './images/mystifyme-single-truffle.png'; // Fallback
-          
-          if(!chip.classList.contains('selected')) return; // handled by global script.js
-          
-          // Create falling element
+          const nutName = chip.textContent.replace(' ✓', '').trim();
+          const imgSrc = nutImages[nutName] || './images/mystifyme-single-truffle.png';
+
           const fallingNut = document.createElement('img');
           fallingNut.src = imgSrc;
-          fallingNut.style.position = 'fixed';
-          fallingNut.style.width = '60px'; // size of nut
-          fallingNut.style.height = '60px';
-          fallingNut.style.objectFit = 'contain';
-          fallingNut.style.zIndex = '9999';
-          fallingNut.style.pointerEvents = 'none';
-          
-          // Initial position (where clicked)
-          fallingNut.style.left = e.clientX - 30 + 'px';
-          fallingNut.style.top = e.clientY - 30 + 'px';
-          
+          fallingNut.style.cssText = `position:fixed;width:60px;height:60px;object-fit:contain;z-index:9999;pointer-events:none;left:${e.clientX - 30}px;top:${e.clientY - 30}px;`;
           document.body.appendChild(fallingNut);
-          
-          // Get Drop Zone physical coordinates
+
           const targetRect = dropZone.getBoundingClientRect();
-          // Pick a random spot inside the tray
           const targetX = targetRect.left + 50 + Math.random() * (targetRect.width - 100);
-          const targetY = targetRect.top + targetRect.height/2 + Math.random() * 50;
-          
-          // Setup animation transition
+          const targetY = targetRect.top + targetRect.height / 2 + Math.random() * 50;
+
           fallingNut.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
-          
-          // Force layout reflow
           void fallingNut.offsetWidth;
-          
-          // Trigger drop
           fallingNut.style.left = targetX + 'px';
           fallingNut.style.top = targetY + 'px';
           fallingNut.style.transform = `rotate(${Math.random() * 360}deg) scale(0.6)`;
           fallingNut.style.opacity = '0.8';
-          
-          // Remove after drop
-          setTimeout(() => {
-            fallingNut.remove();
-          }, 800);
+          setTimeout(() => fallingNut.remove(), 800);
         });
       });
     });
+
+    function toggleMixin(chip) {
+      chip.classList.toggle('selected');
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const selected = [...document.querySelectorAll('.mixin-chip.selected')]
+        .map(c => c.textContent.replace(' ✓', '').trim());
+      const base = localStorage.getItem('mm_base') || 'White Chocolate';
+
+      document.getElementById('summary-base').textContent = 'Base: ' + base;
+      document.getElementById('summary-mixins').textContent = selected.length > 0
+        ? 'Mix-ins: ' + selected.join(', ')
+        : 'No mix-ins selected yet';
+
+      // Save to localStorage
+      localStorage.setItem('mm_mixins', JSON.stringify(selected));
+    }
+
+    function proceedToOrder() {
+      updateSummary();
+      window.location.href = 'order.html';
+    }
   </script>
 
   <!-- ==================== FOOTER ==================== -->
@@ -202,16 +365,11 @@
 
   <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
   <div id="vibe-coding-global-layer">
-    <!-- Floating chocolates -->
     <div class="floating-choco-wrap">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
     </div>
-
-    <!-- Floating particles -->
     <div class="particles" id="particles"></div>
-
-    <!-- Animated gradient orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -221,14 +379,10 @@
   <script>
     if (typeof VanillaTilt !== 'undefined') {
       VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
-        max: 8,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.2,
+        max: 8, speed: 400, glare: true, "max-glare": 0.2,
       });
     }
   </script>
   <script src="./js/script.js"></script>
 </body>
 </html>
-

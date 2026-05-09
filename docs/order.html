@@ -10,6 +10,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/vibe-coding.css">
+  <style>
+    /* Step Indicator */
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 3rem;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .step-item.active { color: var(--gold); }
+    .step-item.done { color: rgba(212,175,55,0.5); }
+    .step-circle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .step-item.active .step-circle { background: var(--gold); color: #000; border-color: var(--gold); }
+    .step-item.done .step-circle { background: rgba(212,175,55,0.2); }
+    .step-line { width: 60px; height: 1px; background: rgba(255,255,255,0.15); margin: 0 0.75rem; }
+
+    /* Order Summary Card */
+    .order-summary-card {
+      background: rgba(212,175,55,0.06);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 16px;
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .order-summary-card h4 {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 1.2rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+    }
+    .summary-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .summary-row .label { color: var(--text-muted); font-size: 0.78rem; letter-spacing: 1px; }
+    .summary-row .value { color: #fff; font-weight: 500; text-align: right; max-width: 60%; }
+    .summary-row .value.gold { color: var(--gold); }
+    .summary-edit-link {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-decoration: underline;
+      display: block;
+      text-align: right;
+      margin-top: 0.8rem;
+      font-family: var(--font-body);
+      letter-spacing: 1px;
+    }
+
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .glitch-text { text-shadow: 2px 0 5px rgba(212,175,55,0.8), -2px 0 5px rgba(220,20,40,0.8); }
+  </style>
 </head>
 <body>
   <!-- Cursor glow -->
@@ -38,12 +115,54 @@
 
   <!-- ==================== ORDER ==================== -->
   <section id="order" style="padding-top: 120px; padding-bottom: 60px;">
+
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+      <div class="step-item done">
+        <div class="step-circle">✓</div>
+        <span>Base</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-item done">
+        <div class="step-circle">✓</div>
+        <span>Mix-ins</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-item active">
+        <div class="step-circle">3</div>
+        <span>Order</span>
+      </div>
+    </div>
+
     <div class="order-container">
       <div class="order-left">
-        <span class="section-eyebrow">Place Your Order</span>
+        <span class="section-eyebrow">Step 3 · Final</span>
         <h2 class="section-heading">Ready to<br><em>Mystify?</em></h2>
-        <p class="order-desc">Order via WhatsApp for a personalized experience. Tell us your base, mix-ins, and we'll craft your dream box.</p>
-        <a href="https://wa.me/918209951190?text=Hi%20Mystify%20Me%2C%20I%20would%20like%20to%20order%20chocolates!" class="whatsapp-btn" id="whatsapp-btn" target="_blank" rel="noopener">
+
+        <!-- Order Summary Card -->
+        <div class="order-summary-card">
+          <h4>🛒 Your Box Summary</h4>
+          <div class="summary-row">
+            <span class="label">Chocolate Base</span>
+            <span class="value gold" id="order-base">White Chocolate</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Mix-ins</span>
+            <span class="value" id="order-mixins">None selected</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Pack Size</span>
+            <span class="value">70gm Box</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Price</span>
+            <span class="value gold">₹150</span>
+          </div>
+          <a href="chocolates.html" class="summary-edit-link">✎ Edit Selection</a>
+        </div>
+
+        <p class="order-desc">Order via WhatsApp for a personalized experience. Your selection above will be auto-filled in the message!</p>
+        <a href="#" class="whatsapp-btn" id="whatsapp-btn" target="_blank" rel="noopener">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span>Order on WhatsApp</span>
         </a>
@@ -60,7 +179,7 @@
   <!-- Checkout Overlay Portal -->
   <div id="checkout-portal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(20px);">
     
-    <!-- Stage 1: Fake Error / Processing Simulator -->
+    <!-- Stage 1: Processing -->
     <div id="checkout-stage-error" style="text-align: center; color: var(--gold);">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" class="spin" style="animation: spin 3s linear infinite;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="30" stroke-linecap="round"/></svg>
       <h2 style="font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 4px; margin-top: 1rem;" class="glitch-text">Processing Fluid Mix...</h2>
@@ -81,7 +200,7 @@
         </div>
         <div class="form-group">
           <textarea name="message" id="form-message" rows="3" placeholder=" " required style="color: white; border-bottom: 1px solid var(--gold);"></textarea>
-          <label for="form-message" style="color: var(--gold);">Your Creation</label>
+          <label for="form-message" style="color: var(--gold);">Your Creation (auto-filled)</label>
         </div>
         <button type="submit" class="hero-cta" style="width: 100%; justify-content: center; border: none; font-size: 1.1rem; padding: 1.2rem;">
           <span>Send Order</span>
@@ -97,48 +216,6 @@
     </div>
 
   </div>
-
-  <style>
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    .glitch-text { text-shadow: 2px 0 5px rgba(212,175,55,0.8), -2px 0 5px rgba(220,20,40,0.8); }
-  </style>
-
-  <script>
-    document.getElementById('initiate-checkout-btn').addEventListener('click', () => {
-      const portal = document.getElementById('checkout-portal');
-      const stageError = document.getElementById('checkout-stage-error');
-      const stageForm = document.getElementById('checkout-stage-form');
-      
-      portal.style.display = 'flex';
-      
-      // Stage 1 -> Stage 2 logic
-      setTimeout(() => {
-        stageError.style.display = 'none';
-        stageForm.style.display = 'block';
-      }, 3000); // 3 seconds of "Fake Processing Error/Simulation"
-    });
-
-    function sendOrderSequence(event) {
-      event.preventDefault();
-      
-      const stageForm = document.getElementById('checkout-stage-form');
-      const stageReady = document.getElementById('checkout-stage-ready');
-      const name = document.getElementById('form-name').value;
-      const phone = document.getElementById('form-phone').value;
-      const message = document.getElementById('form-message').value;
-
-      // Show Stage 3
-      stageForm.style.display = 'none';
-      stageReady.style.display = 'block';
-
-      // Stage 3 -> WhatsApp
-      setTimeout(() => {
-        const text = `Hi Mystify Me!\nMy name is ${name}.\nWhatsApp Number: ${phone}\n\nI just built my dream order:\n${message}`;
-        const whatsappUrl = `https://wa.me/918209951190?text=${encodeURIComponent(text)}`;
-        window.location.href = whatsappUrl;
-      }, 2500); // Wait 2.5s showing "ready"
-    }
-  </script>
 
   <!-- ==================== FOOTER ==================== -->
   <footer id="footer">
@@ -174,16 +251,11 @@
 
   <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
   <div id="vibe-coding-global-layer">
-    <!-- Floating chocolates -->
     <div class="floating-choco-wrap">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
     </div>
-
-    <!-- Floating particles -->
     <div class="particles" id="particles"></div>
-
-    <!-- Animated gradient orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -193,14 +265,58 @@
   <script>
     if (typeof VanillaTilt !== 'undefined') {
       VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
-        max: 8,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.2,
+        max: 8, speed: 400, glare: true, "max-glare": 0.2,
       });
+    }
+
+    // Load order summary from localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+      const base = localStorage.getItem('mm_base') || 'White Chocolate';
+      const mixins = JSON.parse(localStorage.getItem('mm_mixins') || '[]');
+
+      document.getElementById('order-base').textContent = base;
+      document.getElementById('order-mixins').textContent = mixins.length > 0 ? mixins.join(', ') : 'None (Plain)';
+
+      // Pre-fill the WhatsApp order button
+      const mixinsText = mixins.length > 0 ? mixins.join(', ') : 'No mix-ins (plain)';
+      const waText = `Hi Mystify Me! 🍫\n\nI'd like to order:\n📦 Base: ${base}\n🌰 Mix-ins: ${mixinsText}\n💰 Price: ₹150 / 70gm\n\nPlease confirm availability!`;
+      document.getElementById('whatsapp-btn').href = `https://wa.me/918209951190?text=${encodeURIComponent(waText)}`;
+
+      // Pre-fill checkout form message too
+      const msgField = document.getElementById('form-message');
+      if (msgField) {
+        msgField.value = `Base: ${base}\nMix-ins: ${mixinsText}`;
+      }
+    });
+
+    document.getElementById('initiate-checkout-btn').addEventListener('click', () => {
+      const portal = document.getElementById('checkout-portal');
+      const stageError = document.getElementById('checkout-stage-error');
+      const stageForm = document.getElementById('checkout-stage-form');
+      portal.style.display = 'flex';
+      setTimeout(() => {
+        stageError.style.display = 'none';
+        stageForm.style.display = 'block';
+      }, 3000);
+    });
+
+    function sendOrderSequence(event) {
+      event.preventDefault();
+      const stageForm = document.getElementById('checkout-stage-form');
+      const stageReady = document.getElementById('checkout-stage-ready');
+      const name = document.getElementById('form-name').value;
+      const phone = document.getElementById('form-phone').value;
+      const message = document.getElementById('form-message').value;
+
+      stageForm.style.display = 'none';
+      stageReady.style.display = 'block';
+
+      setTimeout(() => {
+        const text = `Hi Mystify Me! 🍫\nMy name is ${name}.\nWhatsApp: ${phone}\n\n${message}\n\nPlease confirm my order!`;
+        window.location.href = `https://wa.me/918209951190?text=${encodeURIComponent(text)}`;
+      }, 2500);
     }
   </script>
   <script src="./js/script.js"></script>
 </body>
 </html>
-

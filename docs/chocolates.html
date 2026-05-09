@@ -3,13 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mystify Me - Chocolates</title>
+  <title>Mystify Me - Choose Your Base</title>
   <meta name="description" content="Handcrafted artisan chocolates from Jaipur. Build your dream chocolate box.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/vibe-coding.css">
+  <style>
+    /* Step Indicator */
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 3rem;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .step-item.active { color: var(--gold); }
+    .step-circle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .step-item.active .step-circle {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold);
+    }
+    .step-line {
+      width: 60px; height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 0 0.75rem;
+    }
+
+    /* Choco Card Enhancements */
+    .choco-card {
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .choco-card.selected-base {
+      box-shadow: 0 0 40px rgba(212,175,55,0.5) !important;
+      border: 1px solid var(--gold) !important;
+    }
+    .choco-card.selected-base::after {
+      content: '✓';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--gold);
+      color: #000;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      z-index: 10;
+    }
+    .best-seller-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #d4af37, #f5d878);
+      color: #000;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    .flavour-notes {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin: 0.6rem 0 1rem;
+    }
+    .flavour-tag {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(212,175,55,0.3);
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      text-transform: uppercase;
+    }
+    .choco-order-btn {
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .choco-order-btn:hover {
+      background: var(--gold) !important;
+      color: #000 !important;
+      transform: scale(1.04);
+    }
+  </style>
 </head>
 <body>
   <!-- Cursor glow -->
@@ -37,16 +142,36 @@
 
 
   <!-- ==================== CHOCOLATES ==================== -->
-  <section id="chocolates" style="padding-top: 120px;">
+  <section id="chocolates" style="padding-top: 120px; padding-bottom: 80px;">
     <div class="section-header">
       <span class="section-eyebrow">The Collection</span>
-      <h2 class="section-heading">Choose Your Base</h2>
+      <h2 class="section-heading">Step 1: Choose Your Base</h2>
       <p class="section-desc">Three bases, endless possibilities. Each handcrafted with the finest ingredients.</p>
+
+      <!-- Step Indicator -->
+      <div class="step-indicator">
+        <div class="step-item active">
+          <div class="step-circle">1</div>
+          <span>Choose Base</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item">
+          <div class="step-circle">2</div>
+          <span>Add Mix-ins</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item">
+          <div class="step-circle">3</div>
+          <span>Order</span>
+        </div>
+      </div>
     </div>
 
     <div class="chocolate-showcase">
       
+      <!-- WHITE -->
       <div class="choco-card vibe-tilt" id="choco-white" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+        <div class="best-seller-badge">🔥 Best Seller</div>
         <div class="choco-card-glow red-glow"></div>
         <div class="choco-card-inner">
           <div class="choco-card-img-wrap">
@@ -56,14 +181,20 @@
             <span class="choco-tag">Base 01</span>
             <h3>White</h3>
             <p class="choco-desc">Creamy &amp; smooth. A velvety canvas for your favourite mix-ins.</p>
+            <div class="flavour-notes">
+              <span class="flavour-tag">Cocoa Butter</span>
+              <span class="flavour-tag">Vanilla</span>
+              <span class="flavour-tag">Milky Sweet</span>
+            </div>
             <div class="choco-meta">
               <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="White Chocolate" data-price="150">Pour Base</button>
+              <button class="choco-order-btn" data-product="White Chocolate" data-price="150" onclick="selectBase('White Chocolate')">Pour Base →</button>
             </div>
           </div>
         </div>
       </div>
       
+      <!-- MILK -->
       <div class="choco-card vibe-tilt" id="choco-milk" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="choco-card-glow red-glow"></div>
         <div class="choco-card-inner">
@@ -74,14 +205,20 @@
             <span class="choco-tag">Base 02</span>
             <h3>Milk</h3>
             <p class="choco-desc">The classic choice. Rich, familiar, and irresistibly comforting.</p>
+            <div class="flavour-notes">
+              <span class="flavour-tag">32% Cocoa</span>
+              <span class="flavour-tag">Caramel</span>
+              <span class="flavour-tag">Smooth Finish</span>
+            </div>
             <div class="choco-meta">
               <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="Milk Chocolate" data-price="150">Pour Base</button>
+              <button class="choco-order-btn" data-product="Milk Chocolate" data-price="150" onclick="selectBase('Milk Chocolate')">Pour Base →</button>
             </div>
           </div>
         </div>
       </div>
       
+      <!-- DARK -->
       <div class="choco-card vibe-tilt" id="choco-dark" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="choco-card-glow red-glow"></div>
         <div class="choco-card-inner">
@@ -92,9 +229,14 @@
             <span class="choco-tag">Base 03</span>
             <h3>Dark</h3>
             <p class="choco-desc">Intense &amp; rich. For those who crave depth and bold cocoa character.</p>
+            <div class="flavour-notes">
+              <span class="flavour-tag">70% Cocoa</span>
+              <span class="flavour-tag">Bold Bitter</span>
+              <span class="flavour-tag">Deep Roast</span>
+            </div>
             <div class="choco-meta">
               <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="Dark Chocolate" data-price="150">Pour Base</button>
+              <button class="choco-order-btn" data-product="Dark Chocolate" data-price="150" onclick="selectBase('Dark Chocolate')">Pour Base →</button>
             </div>
           </div>
         </div>
@@ -137,16 +279,11 @@
 
   <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
   <div id="vibe-coding-global-layer">
-    <!-- Floating chocolates -->
     <div class="floating-choco-wrap">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
     </div>
-
-    <!-- Floating particles -->
     <div class="particles" id="particles"></div>
-
-    <!-- Animated gradient orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -156,14 +293,35 @@
   <script>
     if (typeof VanillaTilt !== 'undefined') {
       VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
-        max: 8,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.2,
+        max: 8, speed: 400, glare: true, "max-glare": 0.2,
       });
     }
+
+    function selectBase(base) {
+      // Save to localStorage
+      localStorage.setItem('mm_base', base);
+      localStorage.removeItem('mm_mixins'); // reset mixins on new base
+
+      // Visual feedback: highlight selected card
+      document.querySelectorAll('.choco-card').forEach(c => c.classList.remove('selected-base'));
+      const map = { 'White Chocolate': 'choco-white', 'Milk Chocolate': 'choco-milk', 'Dark Chocolate': 'choco-dark' };
+      const card = document.getElementById(map[base]);
+      if (card) card.classList.add('selected-base');
+
+      // Brief delay then go to mix-ins
+      setTimeout(() => { window.location.href = 'mixins.html'; }, 500);
+    }
+
+    // On load, highlight previously selected base if user came back
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('mm_base');
+      if (saved) {
+        const map = { 'White Chocolate': 'choco-white', 'Milk Chocolate': 'choco-milk', 'Dark Chocolate': 'choco-dark' };
+        const card = document.getElementById(map[saved]);
+        if (card) card.classList.add('selected-base');
+      }
+    });
   </script>
   <script src="./js/script.js"></script>
 </body>
 </html>
-
