@@ -3,22 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mystify Me - Story</title>
-  <meta name="description" content="Handcrafted artisan chocolates from Jaipur. Build your dream chocolate box.">
+  <title>Our Story — Mystify Me Chocolates, Jaipur</title>
+  <meta name="description" content="The story behind Mystify Me — handcrafted artisan chocolates born in a small Jaipur kitchen. Every truffle hand-poured, no factory, no compromise.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/vibe-coding.css">
+  <style>
+    /* ===== HERO BANNER ===== */
+    .story-hero {
+      min-height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 140px 2rem 80px;
+    }
+    .story-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(212,175,55,0.1) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 70%, rgba(180,80,0,0.08) 0%, transparent 50%);
+    }
+    .story-hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .story-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #fff;
+      margin: 1rem 0;
+    }
+    .story-hero h1 em { color: var(--gold); font-style: italic; }
+    .story-hero p {
+      font-family: var(--font-body);
+      color: var(--text-muted);
+      font-size: 1rem;
+      letter-spacing: 1px;
+      margin-top: 1rem;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(212,175,55,0.04);
+    }
+    .stat-item {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-right: 1px solid rgba(212,175,55,0.12);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* ===== STORY SECTIONS ===== */
+    .story-section {
+      max-width: 1100px;
+      margin: 6rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .story-section.reverse { direction: rtl; }
+    .story-section.reverse > * { direction: ltr; }
+
+    .story-text-block .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .story-text-block h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.2;
+      margin: 0 0 1.5rem;
+    }
+    .story-text-block h2 em { color: var(--gold); font-style: italic; }
+    .story-text-block p {
+      font-family: var(--font-body);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .story-img-wrap {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+    }
+    .story-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .story-img-wrap:hover img { transform: scale(1.04); }
+    .story-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    /* ===== PROCESS STEPS ===== */
+    .process-section {
+      max-width: 1100px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    .process-step {
+      position: relative;
+    }
+    .process-step::after {
+      content: '→';
+      position: absolute;
+      top: 28px;
+      right: -1rem;
+      color: rgba(212,175,55,0.3);
+      font-size: 1.2rem;
+    }
+    .process-step:last-child::after { display: none; }
+    .process-icon {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,175,55,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 1.2rem;
+      background: rgba(212,175,55,0.06);
+    }
+    .process-step h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: #fff;
+      margin: 0 0 0.5rem;
+    }
+    .process-step p {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== VALUES ===== */
+    .values-section {
+      max-width: 1100px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .value-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .value-card:hover {
+      border-color: rgba(212,175,55,0.25);
+      transform: translateY(-4px);
+    }
+    .value-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .value-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: #fff;
+      margin: 0 0 0.5rem;
+    }
+    .value-card p {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ===== CTA ===== */
+    .story-cta {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: rgba(212,175,55,0.04);
+      border-top: 1px solid rgba(212,175,55,0.1);
+      border-bottom: 1px solid rgba(212,175,55,0.1);
+      margin: 3rem 0 0;
+    }
+    .story-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .story-cta h2 em { color: var(--gold); }
+    .story-cta p {
+      font-family: var(--font-body);
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .story-section { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-section.reverse { direction: ltr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-step::after { display: none; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Cursor glow -->
   <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- Grain overlay -->
   <div class="grain-overlay"></div>
 
-  <!-- ==================== NAVIGATION ==================== -->
   <nav id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo" id="nav-logo">Mystify<span>me</span></a>
@@ -35,24 +279,130 @@
     </div>
   </nav>
 
+  <!-- ===== HERO ===== -->
+  <div class="story-hero">
+    <div class="story-hero-bg"></div>
+    <div class="story-hero-content">
+      <span class="section-eyebrow">Our Story</span>
+      <h1>Crafted from <em>obsession,</em><br>not automation</h1>
+      <p>A small Jaipur kitchen. A big dream. One truffle at a time.</p>
+    </div>
+  </div>
 
-  <!-- ==================== STORY ==================== -->
-  <section id="story" style="padding-top: 120px;">
-    <div class="story-container">
-      <div class="story-left">
-        <span class="section-eyebrow">Our Story</span>
-        <h2 class="section-heading">Crafted from<br><em>obsession,</em><br>not automation</h2>
-        <p class="story-text"><strong>Mystify Me</strong> started in a small Jaipur kitchen — every truffle hand-poured, every box packed with intention. No factory. No compromise.</p>
-        <p class="story-text">Pick your base, add mix-ins, and experience chocolate the way it was meant to be — personal, pure, and unforgettable.</p>
+  <!-- ===== STATS ===== -->
+  <section style="padding: 0 2rem 5rem;">
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Boxes Delivered</span>
       </div>
-      <div class="story-right">
-        <div class="story-image-wrapper vibe-tilt" data-tilt data-tilt-max="5" data-tilt-speed="400">
-          <img src="./images/mystifyme-authentic-tray.png" alt="Mystify Me Authentic Truffles" class="story-img">
-          <div class="story-img-glow red-glow"></div>
-        </div>
+      <div class="stat-item">
+        <span class="stat-number">12+</span>
+        <span class="stat-label">Unique Mix-ins</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Chocolate Bases</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">0%</span>
+        <span class="stat-label">Preservatives</span>
       </div>
     </div>
   </section>
+
+  <!-- ===== SECTION 1: The Beginning ===== -->
+  <section class="story-section">
+    <div class="story-text-block">
+      <span class="eyebrow">How It Began</span>
+      <h2>Started with a <em>craving</em> that no store could satisfy</h2>
+      <p>Mystify Me wasn't planned — it was felt. It started with a simple frustration: every chocolate in the market tasted the same. Factory-made, preservative-filled, forgettable.</p>
+      <p>So we started making our own. In a small Jaipur kitchen, with no machines, no shortcuts, and an obsession for getting it right. Every truffle was hand-poured into its mold. Every box was packed by hand.</p>
+      <p>People tasted them and kept coming back. That's how Mystify Me was born.</p>
+    </div>
+    <div class="story-img-wrap vibe-tilt" data-tilt data-tilt-max="4" data-tilt-speed="600">
+      <img src="./images/story-kitchen.png" alt="Artisan chocolate being made by hand in our Jaipur kitchen">
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="process-section">
+    <span class="section-eyebrow">How We Make It</span>
+    <h2 class="section-heading">Every truffle, made with intention</h2>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-icon">🍫</div>
+        <h4>Source</h4>
+        <p>Premium cocoa butter, single-origin chocolate, and fresh local ingredients sourced from across India.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-icon">🔥</div>
+        <h4>Temper</h4>
+        <p>Chocolate is carefully tempered by hand to get that perfect snap, gloss, and smooth melt.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-icon">🌰</div>
+        <h4>Mix-in</h4>
+        <p>Your chosen mix-ins — almonds, rose, saffron, cardamom — are folded in fresh before setting.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-icon">📦</div>
+        <h4>Pack</h4>
+        <p>Each box is hand-packed, sealed with care, and dispatched fresh within 24 hours of your order.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: The Packaging ===== -->
+  <section class="story-section reverse">
+    <div class="story-text-block">
+      <span class="eyebrow">What Makes Us Different</span>
+      <h2>Premium packaging, <em>personal</em> experience</h2>
+      <p>When you order from Mystify Me, you're not picking from a shelf. You're building your own box — your base, your mix-ins, your moment.</p>
+      <p>We believe chocolate should be personal. Whether it's a gift for someone you love, a treat for yourself, or a festive box for a celebration — we craft it to match the occasion.</p>
+      <p>No two boxes are exactly the same. That's the whole point.</p>
+    </div>
+    <div class="story-img-wrap vibe-tilt" data-tilt data-tilt-max="4" data-tilt-speed="600">
+      <img src="./images/story-packaging.png" alt="Mystify Me premium chocolate box being hand-packed">
+    </div>
+  </section>
+
+  <!-- ===== VALUES ===== -->
+  <section class="values-section">
+    <div class="section-header" style="text-align: center;">
+      <span class="section-eyebrow">Our Promise</span>
+      <h2 class="section-heading">What we stand for</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">🙌</span>
+        <h4>100% Handcrafted</h4>
+        <p>Every truffle is hand-poured in our Jaipur kitchen. No machines. No assembly lines. Just hands, craft, and care.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🌿</span>
+        <h4>Zero Preservatives</h4>
+        <p>We use only fresh, natural ingredients. No artificial flavours. No stabilisers. What you taste is exactly what's inside.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🎁</span>
+        <h4>Gift-Ready Always</h4>
+        <p>Every box is packed beautifully — whether for a birthday, anniversary, or just because. Gifting made effortless.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <div class="story-cta">
+    <h2>Ready to taste the <em>difference?</em></h2>
+    <p>Build your dream chocolate box — your base, your mix-ins, your moment.</p>
+    <a href="chocolates.html" class="hero-cta" id="story-cta-btn">
+      <span>Start Crafting</span>
+      <div class="cta-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+  </div>
 
   <!-- ==================== FOOTER ==================== -->
   <footer id="footer">
@@ -86,18 +436,12 @@
     </div>
   </footer>
 
-  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
   <div id="vibe-coding-global-layer">
-    <!-- Floating chocolates -->
     <div class="floating-choco-wrap">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c2">
     </div>
-
-    <!-- Floating particles -->
     <div class="particles" id="particles"></div>
-
-    <!-- Animated gradient orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
@@ -106,15 +450,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
   <script>
     if (typeof VanillaTilt !== 'undefined') {
-      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
-        max: 8,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.2,
-      });
+      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), { max: 5, speed: 600, glare: true, "max-glare": 0.15 });
     }
   </script>
   <script src="./js/script.js"></script>
 </body>
 </html>
-
