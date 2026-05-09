@@ -171,13 +171,25 @@
   } catch (e) {}
 
   function updateMixinsStorage() {
-    const selected = [...document.querySelectorAll('.mixin-chip.selected')].map(c => c.textContent);
+    const selected = [...document.querySelectorAll('.mixin-chip.selected')].map(c => c.textContent.trim());
     localStorage.setItem('mystifyMixins', JSON.stringify(selected));
+    // Also sync to mm_mixins key used by order page
+    localStorage.setItem('mm_mixins', JSON.stringify(selected));
+    // Update sticky summary bar if present
+    const summaryMixins = document.getElementById('summary-mixins');
+    const summaryBase = document.getElementById('summary-base');
+    if (summaryMixins) {
+      summaryMixins.textContent = selected.length > 0 ? 'Mix-ins: ' + selected.join(', ') : 'No mix-ins selected yet';
+    }
+    if (summaryBase) {
+      const base = localStorage.getItem('mm_base') || localStorage.getItem('mystifyBase') || 'White Chocolate';
+      summaryBase.textContent = 'Base: ' + base;
+    }
   }
 
   mixinChips.forEach(chip => {
     // Initial render
-    if (savedMixins.includes(chip.textContent)) {
+    if (savedMixins.includes(chip.textContent.trim())) {
       chip.classList.add('selected');
       chip.style.background = 'rgba(212, 175, 55, 0.15)';
       chip.style.borderColor = 'rgba(212, 175, 55, 0.3)';
@@ -198,6 +210,7 @@
       updateMixinsStorage();
     });
   });
+
 
   // ===== CHOCOLATE POURING SIMULATION (Base Selection) =====
   const orderButtons = document.querySelectorAll('.choco-order-btn');
