@@ -11,119 +11,245 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/vibe-coding.css">
   <style>
-    /* Step Indicator */
+    /* ===== STEP INDICATOR ===== */
     .step-indicator {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 0;
-      margin-bottom: 3rem;
+      margin: 0 auto 4rem;
     }
     .step-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       font-family: var(--font-body);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--text-muted);
     }
     .step-item.active { color: var(--gold); }
     .step-circle {
-      width: 28px; height: 28px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       border: 1px solid currentColor;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.75rem; font-weight: 600; flex-shrink: 0;
     }
-    .step-item.active .step-circle {
-      background: var(--gold);
-      color: #000;
-      border-color: var(--gold);
-    }
-    .step-line {
-      width: 60px; height: 1px;
-      background: rgba(255,255,255,0.15);
-      margin: 0 0.75rem;
+    .step-item.active .step-circle { background: var(--gold); color: #000; border-color: var(--gold); }
+    .step-line { width: 50px; height: 1px; background: rgba(255,255,255,0.12); margin: 0 1rem; }
+
+    /* ===== NEW SHOWCASE LAYOUT ===== */
+    .base-showcase {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    /* Choco Card Enhancements */
-    .choco-card {
+    .base-card {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
       position: relative;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .choco-card.selected-base {
-      box-shadow: 0 0 40px rgba(212,175,55,0.5) !important;
-      border: 1px solid var(--gold) !important;
+    .base-card:hover {
+      border-color: rgba(212,175,55,0.35);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      transform: translateY(-4px);
     }
-    .choco-card.selected-base::after {
-      content: '✓';
+    .base-card.selected {
+      border-color: var(--gold) !important;
+      box-shadow: 0 0 50px rgba(212,175,55,0.2), 0 20px 60px rgba(0,0,0,0.5) !important;
+    }
+
+    /* Alternate layout for even cards */
+    .base-card:nth-child(even) {
+      grid-template-columns: 1fr 340px;
+    }
+    .base-card:nth-child(even) .base-card-img-wrap {
+      order: 2;
+    }
+    .base-card:nth-child(even) .base-card-content {
+      order: 1;
+    }
+
+    .base-card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .base-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .base-card:hover .base-card-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    /* Color accent strip on left edge */
+    .base-card::before {
+      content: '';
       position: absolute;
-      top: 12px;
-      right: 12px;
-      background: var(--gold);
-      color: #000;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      font-weight: 700;
-      z-index: 10;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 24px 0 0 24px;
+      transition: opacity 0.3s;
     }
+    .base-card.white-card::before { background: linear-gradient(to bottom, #f5f0e8, #d4c9b0); }
+    .base-card.milk-card::before  { background: linear-gradient(to bottom, #c8864a, #8b5e3c); }
+    .base-card.dark-card::before  { background: linear-gradient(to bottom, #5a3825, #2d1e13); }
+
+    .base-card-content {
+      padding: 2.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .base-tag {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .base-name {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 400;
+      line-height: 1;
+      color: #fff;
+      margin: 0;
+    }
+
     .best-seller-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
       background: linear-gradient(135deg, #d4af37, #f5d878);
       color: #000;
       font-family: var(--font-body);
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      padding: 4px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
-      white-space: nowrap;
-      z-index: 10;
+      width: fit-content;
     }
+
+    .base-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
     .flavour-notes {
       display: flex;
-      gap: 0.4rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
-      margin: 0.6rem 0 1rem;
     }
     .flavour-tag {
       font-size: 0.65rem;
       letter-spacing: 1px;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 10px;
-      border: 1px solid rgba(212,175,55,0.3);
-      color: var(--text-muted);
+      border: 1px solid rgba(212,175,55,0.25);
+      color: rgba(212,175,55,0.7);
       font-family: var(--font-body);
       text-transform: uppercase;
     }
-    .choco-order-btn {
+
+    .base-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .base-price {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--gold);
+    }
+    .base-price small {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+
+    .select-base-btn {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.25s ease;
     }
-    .choco-order-btn:hover {
-      background: var(--gold) !important;
-      color: #000 !important;
-      transform: scale(1.04);
+    .select-base-btn:hover,
+    .base-card.selected .select-base-btn {
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+    }
+
+    /* Selected checkmark */
+    .selected-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 34px; height: 34px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      color: #000;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    .base-card.selected .selected-badge {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .base-card,
+      .base-card:nth-child(even) {
+        grid-template-columns: 1fr;
+      }
+      .base-card-img-wrap { min-height: 220px; }
+      .base-card:nth-child(even) .base-card-img-wrap { order: 0; }
+      .base-card:nth-child(even) .base-card-content { order: 0; }
+      .base-name { font-size: 2rem; }
+      .base-card-content { padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Cursor glow -->
   <div class="cursor-glow" id="cursor-glow"></div>
-
-  <!-- Grain overlay -->
   <div class="grain-overlay"></div>
 
-  <!-- ==================== NAVIGATION ==================== -->
   <nav id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo" id="nav-logo">Mystify<span>me</span></a>
@@ -140,15 +266,13 @@
     </div>
   </nav>
 
-
   <!-- ==================== CHOCOLATES ==================== -->
-  <section id="chocolates" style="padding-top: 120px; padding-bottom: 80px;">
+  <section id="chocolates" style="padding-top: 120px; padding-bottom: 100px;">
     <div class="section-header">
       <span class="section-eyebrow">The Collection</span>
       <h2 class="section-heading">Step 1: Choose Your Base</h2>
       <p class="section-desc">Three bases, endless possibilities. Each handcrafted with the finest ingredients.</p>
 
-      <!-- Step Indicator -->
       <div class="step-indicator">
         <div class="step-item active">
           <div class="step-circle">1</div>
@@ -157,7 +281,7 @@
         <div class="step-line"></div>
         <div class="step-item">
           <div class="step-circle">2</div>
-          <span>Add Mix-ins</span>
+          <span>Mix-ins</span>
         </div>
         <div class="step-line"></div>
         <div class="step-item">
@@ -167,81 +291,81 @@
       </div>
     </div>
 
-    <div class="chocolate-showcase">
-      
-      <!-- WHITE -->
-      <div class="choco-card vibe-tilt" id="choco-white" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-        <div class="best-seller-badge">🔥 Best Seller</div>
-        <div class="choco-card-glow red-glow"></div>
-        <div class="choco-card-inner">
-          <div class="choco-card-img-wrap">
-            <img src="./images/mystifyme-authentic-tray.png" alt="White Chocolate" class="choco-card-img filter-white">
+    <div class="base-showcase">
+
+      <!-- WHITE CHOCOLATE -->
+      <div class="base-card white-card" id="card-white" onclick="selectBase('White Chocolate', this)">
+        <div class="selected-badge">✓</div>
+        <div class="base-card-img-wrap">
+          <img src="./images/white-chocolate.png" alt="White Chocolate Truffle">
+        </div>
+        <div class="base-card-content">
+          <span class="base-tag">Base 01</span>
+          <h3 class="base-name">White</h3>
+          <div class="best-seller-badge">🔥 Best Seller</div>
+          <p class="base-desc">Creamy &amp; smooth. A velvety canvas for your favourite mix-ins. Made with premium cocoa butter and fresh vanilla.</p>
+          <div class="flavour-notes">
+            <span class="flavour-tag">Cocoa Butter</span>
+            <span class="flavour-tag">Vanilla</span>
+            <span class="flavour-tag">Milky Sweet</span>
           </div>
-          <div class="choco-card-content">
-            <span class="choco-tag">Base 01</span>
-            <h3>White</h3>
-            <p class="choco-desc">Creamy &amp; smooth. A velvety canvas for your favourite mix-ins.</p>
-            <div class="flavour-notes">
-              <span class="flavour-tag">Cocoa Butter</span>
-              <span class="flavour-tag">Vanilla</span>
-              <span class="flavour-tag">Milky Sweet</span>
-            </div>
-            <div class="choco-meta">
-              <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="White Chocolate" data-price="150" onclick="selectBase('White Chocolate')">Pour Base →</button>
-            </div>
+          <div class="base-footer">
+            <div class="base-price">₹150 <small>/ 70gm</small></div>
+            <button class="select-base-btn" onclick="event.stopPropagation(); selectBase('White Chocolate', document.getElementById('card-white'))">
+              Pour Base →
+            </button>
           </div>
         </div>
       </div>
-      
-      <!-- MILK -->
-      <div class="choco-card vibe-tilt" id="choco-milk" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-        <div class="choco-card-glow red-glow"></div>
-        <div class="choco-card-inner">
-          <div class="choco-card-img-wrap">
-            <img src="./images/mystifyme-authentic-tray.png" alt="Milk Chocolate" class="choco-card-img filter-milk">
+
+      <!-- MILK CHOCOLATE -->
+      <div class="base-card milk-card" id="card-milk" onclick="selectBase('Milk Chocolate', this)">
+        <div class="selected-badge">✓</div>
+        <div class="base-card-img-wrap">
+          <img src="./images/milk-chocolate.png" alt="Milk Chocolate Truffle">
+        </div>
+        <div class="base-card-content">
+          <span class="base-tag">Base 02</span>
+          <h3 class="base-name">Milk</h3>
+          <p class="base-desc">The classic choice. Rich, familiar, and irresistibly comforting. The go-to for gifting and celebrations.</p>
+          <div class="flavour-notes">
+            <span class="flavour-tag">32% Cocoa</span>
+            <span class="flavour-tag">Caramel Notes</span>
+            <span class="flavour-tag">Smooth Finish</span>
           </div>
-          <div class="choco-card-content">
-            <span class="choco-tag">Base 02</span>
-            <h3>Milk</h3>
-            <p class="choco-desc">The classic choice. Rich, familiar, and irresistibly comforting.</p>
-            <div class="flavour-notes">
-              <span class="flavour-tag">32% Cocoa</span>
-              <span class="flavour-tag">Caramel</span>
-              <span class="flavour-tag">Smooth Finish</span>
-            </div>
-            <div class="choco-meta">
-              <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="Milk Chocolate" data-price="150" onclick="selectBase('Milk Chocolate')">Pour Base →</button>
-            </div>
+          <div class="base-footer">
+            <div class="base-price">₹150 <small>/ 70gm</small></div>
+            <button class="select-base-btn" onclick="event.stopPropagation(); selectBase('Milk Chocolate', document.getElementById('card-milk'))">
+              Pour Base →
+            </button>
           </div>
         </div>
       </div>
-      
-      <!-- DARK -->
-      <div class="choco-card vibe-tilt" id="choco-dark" data-tilt data-tilt-max="8" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-        <div class="choco-card-glow red-glow"></div>
-        <div class="choco-card-inner">
-          <div class="choco-card-img-wrap">
-            <img src="./images/mystifyme-authentic-tray.png" alt="Dark Chocolate" class="choco-card-img filter-dark">
+
+      <!-- DARK CHOCOLATE -->
+      <div class="base-card dark-card" id="card-dark" onclick="selectBase('Dark Chocolate', this)">
+        <div class="selected-badge">✓</div>
+        <div class="base-card-img-wrap">
+          <img src="./images/dark-chocolate.png" alt="Dark Chocolate Truffle">
+        </div>
+        <div class="base-card-content">
+          <span class="base-tag">Base 03</span>
+          <h3 class="base-name">Dark</h3>
+          <p class="base-desc">Intense &amp; rich. For those who crave depth and bold cocoa character. 70% single-origin cocoa.</p>
+          <div class="flavour-notes">
+            <span class="flavour-tag">70% Cocoa</span>
+            <span class="flavour-tag">Bold &amp; Bitter</span>
+            <span class="flavour-tag">Deep Roast</span>
           </div>
-          <div class="choco-card-content">
-            <span class="choco-tag">Base 03</span>
-            <h3>Dark</h3>
-            <p class="choco-desc">Intense &amp; rich. For those who crave depth and bold cocoa character.</p>
-            <div class="flavour-notes">
-              <span class="flavour-tag">70% Cocoa</span>
-              <span class="flavour-tag">Bold Bitter</span>
-              <span class="flavour-tag">Deep Roast</span>
-            </div>
-            <div class="choco-meta">
-              <span class="choco-price">₹150 <small>/ 70gm</small></span>
-              <button class="choco-order-btn" data-product="Dark Chocolate" data-price="150" onclick="selectBase('Dark Chocolate')">Pour Base →</button>
-            </div>
+          <div class="base-footer">
+            <div class="base-price">₹150 <small>/ 70gm</small></div>
+            <button class="select-base-btn" onclick="event.stopPropagation(); selectBase('Dark Chocolate', document.getElementById('card-dark'))">
+              Pour Base →
+            </button>
           </div>
         </div>
       </div>
-      
+
     </div>
   </section>
 
@@ -277,7 +401,6 @@
     </div>
   </footer>
 
-  <!-- ==================== UNIVERSAL VIBE CODING BACKGROUND ==================== -->
   <div id="vibe-coding-global-layer">
     <div class="floating-choco-wrap">
       <img src="./images/mystifyme-single-truffle.png" alt="Floating Truffles" class="floating-choco c1">
@@ -291,36 +414,27 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
   <script>
-    if (typeof VanillaTilt !== 'undefined') {
-      VanillaTilt.init(document.querySelectorAll(".vibe-tilt"), {
-        max: 8, speed: 400, glare: true, "max-glare": 0.2,
-      });
-    }
-
-    function selectBase(base) {
-      // Save to localStorage
-      localStorage.setItem('mm_base', base);
-      localStorage.removeItem('mm_mixins'); // reset mixins on new base
-
-      // Visual feedback: highlight selected card
-      document.querySelectorAll('.choco-card').forEach(c => c.classList.remove('selected-base'));
-      const map = { 'White Chocolate': 'choco-white', 'Milk Chocolate': 'choco-milk', 'Dark Chocolate': 'choco-dark' };
-      const card = document.getElementById(map[base]);
-      if (card) card.classList.add('selected-base');
-
-      // Brief delay then go to mix-ins
-      setTimeout(() => { window.location.href = 'mixins.html'; }, 500);
-    }
-
-    // On load, highlight previously selected base if user came back
+    // Highlight previously chosen base on page load
     window.addEventListener('DOMContentLoaded', () => {
       const saved = localStorage.getItem('mm_base');
       if (saved) {
-        const map = { 'White Chocolate': 'choco-white', 'Milk Chocolate': 'choco-milk', 'Dark Chocolate': 'choco-dark' };
-        const card = document.getElementById(map[saved]);
-        if (card) card.classList.add('selected-base');
+        const idMap = { 'White Chocolate': 'card-white', 'Milk Chocolate': 'card-milk', 'Dark Chocolate': 'card-dark' };
+        const card = document.getElementById(idMap[saved]);
+        if (card) card.classList.add('selected');
       }
     });
+
+    function selectBase(base, cardEl) {
+      localStorage.setItem('mm_base', base);
+      localStorage.removeItem('mm_mixins');
+
+      // Remove selected from all, add to clicked
+      document.querySelectorAll('.base-card').forEach(c => c.classList.remove('selected'));
+      if (cardEl) cardEl.classList.add('selected');
+
+      // Brief pause for visual feedback then navigate
+      setTimeout(() => { window.location.href = 'mixins.html'; }, 400);
+    }
   </script>
   <script src="./js/script.js"></script>
 </body>
